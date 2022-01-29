@@ -1,0 +1,130 @@
+<section class="admin-content">
+    <div class="bg-dark">
+
+        <div class="container  m-b-30">
+
+            <div class="row">
+
+                <div class="col-12 text-white p-t-40 p-b-90">
+                    <h4 class="">Manage Product Types</h4>
+                    <p class="opacity-75 "></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container pull-up">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+
+                        <div class="media">
+
+                            <div class="media-body m-auto">
+
+                                <h5 class="m-0"> Manage Product Types </h5>
+
+                                <div class="opacity-75 text-muted"></div>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="card-controls">
+
+                        </div>
+
+                    </div>
+                <div class="card-body ">
+                    <div class="row">
+                        <div class="col-md-6 offset-md-3">
+                            <form [formGroup]="updateTypeForm"
+                            #f="ngForm"
+                            autocomplete="off"
+                            (ngSubmit)="f.valid ? updateType(f): ''">
+            
+                                   
+                                <div class="form-row m-b-20" >
+                                    <div class="form-group col-md-12">
+                                        <label for="mobile">Type</label>
+                                        <input type="text" class="form-control"
+                                        [ngClass]="{'is-invalid': updateTypeForm.controls['name'].status == 'INVALID' && updateTypeForm.controls['name'].touched}"
+                                        id="phone" formControlName="name"
+                                            placeholder="Enter Type Name">
+                                    </div>
+                                            
+                                    
+                                </div>
+                                
+                                <div class="text-center">
+                                    <button type="submit" [disabled]="f.invalid" class="btn btn-primary">{{typeId ? "Update": "Create"}}</button>
+            
+                                </div>
+            
+                                
+                            </form>
+                        </div>
+                    </div>
+
+                    
+
+                </div>
+</div>
+            </div>
+            <div class="col-12 m-t-20">
+                <div class="card">
+                    <div class="card-header">
+
+                        <div class="media">
+
+                            <div class="media-body m-auto">
+
+                                <h5 class="m-0"> Type List </h5>
+
+                                <div class="opacity-75 text-muted"></div>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="card-controls">
+
+                        </div>
+
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive p-t-10">
+                            <table id="member" class="table   " style="width:100%">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Type</th>
+                                    
+                                    <th>Action</th>
+                                    
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr *ngFor="let type of allTypesList; let i=index">
+                                    <td>{{i+1}}</td>
+                                    <td>{{type.name}}</td>
+                                    <td>
+                                        <a style="font-size:18px;padding: 5px; cursor: pointer;" (click)="setEditForm(type)" ><i class="mdi mdi-square-edit-outline" title="Edit" alt="Edit"></i></a>
+                                        <a style="font-size:18px; cursor: pointer;" 
+                                        (click)="deleteById(type.id)"
+                                       ><i class="mdi mdi-delete-circle-outline" title="delete" alt="delete"></i></a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

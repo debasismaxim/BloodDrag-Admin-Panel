@@ -1,0 +1,149 @@
+<section class="admin-content">
+    <div class="bg-dark">
+
+        <div class="container  m-b-30">
+
+            <div class="row">
+
+                <div class="col-12 text-white p-t-40 p-b-90">
+                    <h4 class="">Manage Social Media</h4>
+                    <p class="opacity-75 "></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container pull-up">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+
+                        <div class="media">
+
+                            <div class="media-body m-auto">
+
+                                <h5 class="m-0"> Manage Social Media </h5>
+
+                                <div class="opacity-75 text-muted"></div>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="card-controls">
+
+                        </div>
+
+                    </div>
+                <div class="card-body ">
+                    <div class="row">
+                        <div class="col-md-6 offset-md-3">
+                            <form [formGroup]="updateSocialMediaForm"
+                            #f="ngForm"
+                            autocomplete="off"
+                            (ngSubmit)="f.valid ? updateSocialMedia(f): ''">
+                            <div class="form-row m-b-20" >
+                            <div class="form-group col-md-12">
+                                <label style="display: block;">Icon</label>
+                                <label class="avatar-input">
+                                    <span class="avatar avatar-xl">
+                                        <img [src]="updateSocialMediaForm.value.icon? socialIconBaseUrl+updateSocialMediaForm.value.icon:'assets/img/badges/default.jpg'" alt="..."
+                                             class="avatar-img">
+                                         <span class="avatar-input-icon">
+                                        <i class=" mdi mdi-progress-upload mdi-24px"></i>
+                                    </span>
+                                    </span>
+                                    <input type="file" class="avatar-file-picker" (change)="readFile($event)" >
+
+                                </label>
+                            </div>  
+                            </div>
+                                <div class="form-row m-b-20" >
+                                    <div class="form-group col-md-12">
+                                        <label for="mobile">Url</label>
+                                        <input type="text" class="form-control"
+                                        [ngClass]="{'is-invalid': updateSocialMediaForm.controls['url'].status == 'INVALID' && updateSocialMediaForm.controls['url'].touched}"
+                                        id="phone" formControlName="url"
+                                            placeholder="Enter url">
+                                    </div>
+                                            
+                                    
+                                </div>
+                                
+                                <div class="text-center">
+                                    <button type="submit" [disabled]="f.invalid" class="btn btn-primary">{{socialMediaId ? "Update": "Create"}}</button>
+            
+                                </div>
+            
+                                
+                            </form>
+                        </div>
+                    </div>
+
+                    
+
+                </div>
+</div>
+            </div>
+            <div class="col-12 m-t-20">
+                <div class="card">
+                    <div class="card-header">
+
+                        <div class="media">
+
+                            <div class="media-body m-auto">
+
+                                <h5 class="m-0"> Social Media List </h5>
+
+                                <div class="opacity-75 text-muted"></div>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="card-controls">
+
+                        </div>
+
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive p-t-10">
+                            <table id="member" class="table   " style="width:100%">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Icon</th>
+                                    <th>Url</th>
+                                    <th>Action</th>
+                                    
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr *ngFor="let sm of allSocialMediaList; let i=index" style="vertical-align: middle;">
+                                    <td>{{i+1}}</td>
+                                    <td><span class="avatar avatar-l">
+                                        <img [src]="socialIconBaseUrl + sm.icon" alt="..." class="avatar-img table-data">
+                                    </span></td>
+                                    <td>
+                                        {{sm.url}}
+                                    </td>
+                                    <td>
+                                        <a style="font-size:18px;padding: 5px; cursor: pointer;" (click)="setEditForm(sm)" ><i class="mdi mdi-square-edit-outline" title="Edit" alt="Edit"></i></a>
+                                        <a style="font-size:18px; cursor: pointer;" 
+                                        (click)="deleteById(sm.id)"
+                                       ><i class="mdi mdi-delete-circle-outline" title="delete" alt="delete"></i></a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

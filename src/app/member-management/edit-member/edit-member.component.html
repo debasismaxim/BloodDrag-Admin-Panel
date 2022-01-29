@@ -1,0 +1,408 @@
+<section class="admin-content">
+
+    <div class="bg-dark m-b-30" *ngIf="memberDetails">
+
+        <div class="container">
+
+            <div class="row p-b-60 p-t-60">
+
+
+
+                <div class="col-md-6 text-white p-b-30">
+
+                    <div class="media">
+
+
+
+                        <h5 class="mt-0">{{memberDetails.firstName + " " + memberDetails.lastName}}</h5>
+
+
+
+                        <div class="media-body m-auto">
+
+
+
+
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+                <div class="col-md-6 text-white my-auto text-md-right p-b-30">
+
+
+
+                    <div class="">
+
+                        <a [routerLink]="['/mm/view-members' ]" routerLinkActive="router-link-active"
+                            class="btn ml-2 mr-2 btn-primary"><i class="mdi mdi-account-arrow-left"></i> Back
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="container pull-up">
+
+        <div class="row">
+
+            <div class="col-lg-8">
+
+                <!--message-->
+
+
+                <!--message-->
+
+
+
+
+
+                <!-- Single post-->
+
+                <div class="card m-b-30">
+
+                    <div class="card-header">
+
+                        <div class="media">
+
+                            <div class="media-body m-auto">
+
+                                <h5 class="m-0"> Update Member </h5>
+
+                                <div class="opacity-75 text-muted"></div>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="card-controls">
+
+                        </div>
+
+                    </div>
+
+                    <div class="card-raw">
+
+                        <div class="card-body">
+
+
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-12">
+
+                        <div class="card-body ">
+
+                            <form [formGroup]="editMemberForm" #f="ngForm" (ngSubmit)="f.valid ? updateDetails(f): ''">
+
+                                
+                                <!-- <div class="form-row m-b-20">
+
+                                    <label for="username">Email</label>
+
+                                    <input type="text" class="form-control" id="email"
+                                        formControlName="email" readonly="">
+
+                                </div> -->
+
+                                
+
+
+
+
+
+
+
+
+                                <div class="form-row m-b-20">
+                                    <div class="form-group col-md-6">
+                                        <label class="avatar-input">
+                                            <i class="fa fa-times delete-icon" *ngIf="editMemberForm.value.profilePic" aria-hidden="true" (click)="removeImage($event)"></i>
+                                            <span class="avatar avatar-xxl">
+                                                <img  [src]="editMemberForm.value.profilePic ? profileImageBaseUrl + editMemberForm.value.profilePic: 'assets/img/users/default.jpg'" alt="..."
+                                                     class="avatar-img" id="avatar-img">
+                                                 <span class="avatar-input-icon">
+                                                <i class=" mdi mdi-progress-upload mdi-24px"></i>
+                                            </span>
+                                            </span>
+                                            <input type="file" class="avatar-file-picker" (change)="readFile($event)" >
+        
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-row m-b-20">
+
+                                    <label for="username">First Name</label>
+
+                                    <input type="text" class="form-control" id="firstName"
+                                    [ngClass]="{'is-invalid': editMemberForm.controls['firstName'].status == 'INVALID' && editMemberForm.controls['firstName'].touched}"
+                                    formControlName="firstName"
+                                        placeholder="First Name" required="">
+
+                                </div>
+
+
+
+                                <div class="form-row m-b-20">
+
+                                    <label for="username">Last Name</label>
+
+                                    <input type="text" class="form-control" id="lname"
+                                    [ngClass]="{'is-invalid': editMemberForm.controls['lastName'].status == 'INVALID' && editMemberForm.controls['lastName'].touched}"
+                                    formControlName="lastName"
+                                        placeholder="Last Name" >
+
+                                </div>
+
+
+                                <div class="form-row m-b-20">
+
+                                    <label for="username">Phone</label>
+
+                                    <input type="text" class="form-control" id="phone" formControlName="mobile"
+                                    [ngClass]="{'is-invalid': editMemberForm.controls['mobile'].status == 'INVALID' && editMemberForm.controls['mobile'].touched}"
+                                        placeholder="+1 13 456 1879" autocomplete="off">
+
+                                </div>
+                                <div class="form-row m-b-20">
+
+                                    <label for="username">Email</label>
+
+                                    <input type="text" class="form-control" id="ship_email" formControlName="email"
+                                    [ngClass]="{'is-invalid': editMemberForm.controls['email'].status == 'INVALID' && editMemberForm.controls['email'].touched}"
+                                         placeholder="" autocomplete="off" [attr.disabled]="true">
+
+                                </div>
+                                <div class="form-row m-b-20">
+
+                                    <label for="Password">Password</label>
+
+                                    <input type="password" class="form-control" formControlName="userPassword"
+                                    [ngClass]="{'is-invalid': editMemberForm.controls['userPassword'].status == 'INVALID' && editMemberForm.controls['userPassword'].touched}">
+                                    <small class="form-text text-muted">Note: Leave it blank, if you don't want to
+                                        change password</small>
+                                    <!-- <input type="hidden" formControlName="oldpsw" value="492584242d39f1ed014f959789f2aace"> -->
+                                </div>
+                                <div class="form-row m-b-20">
+
+                                    <label>Address</label>
+
+                                    <input type="text" class="form-control" id="ship_address1" formControlName="residentAddress"
+                                    [ngClass]="{'is-invalid': editMemberForm.controls['residentAddress'].status == 'INVALID' && editMemberForm.controls['residentAddress'].touched}">
+                                </div>
+
+                                
+
+                                <div class="form-row m-b-20">
+
+                                    <label for="username">Country</label>
+
+
+                                    <select class="form-control "  [(ngModel)]="countryName"
+                                    [ngClass]="{'is-invalid': editMemberForm.controls['country'].status == 'INVALID' && editMemberForm.controls['country'].touched}"
+                                    (ngModelChange)="getStateListByCountry(countryName)" formControlName="country"
+                                        id="country-dropdown">
+                                        <option value="" selected disabled>Select Country</option>
+                                        <option *ngFor="let country of countryList" [value]="country.name">{{country?.name}}</option>
+                                    </select>
+
+                                </div>
+
+
+                                <div class="form-row m-b-20">
+
+                                    <label for="username">State</label>
+
+                                    <select class="form-control " formControlName="state"
+                                    [ngClass]="{'is-invalid': editMemberForm.controls['state'].status == 'INVALID' && editMemberForm.controls['state'].touched}"
+                                     [(ngModel)]="stateName" (ngModelChange)="getCityListByState(editMemberForm.value.state, editMemberForm.value.country)"
+                                        id="state-dropdown">
+                                        <option  value="" selected disabled>Select State/Province</option>
+                                        <option *ngFor="let state of stateList" [value]="state.name">{{state?.name}}</option>
+
+                                    </select>
+
+                                </div>
+
+
+
+
+
+
+                                <div class="form-row m-b-20">
+
+                                    <label for="username">City</label>
+
+                                    <select class="form-control" formControlName="city"
+                                    [ngClass]="{'is-invalid': editMemberForm.controls['city'].status == 'INVALID' && editMemberForm.controls['city'].touched}"
+                                        id="state-dropdown">
+                                        <option  value="" selected disabled>Select City</option>
+                                        <option *ngFor="let city of cityList" [value]="city.name">{{city?.name}}</option>
+
+                                    </select>
+                                    <!-- <input type="text" class="form-control" id="ship_city" formControlName="city"
+                                        > -->
+
+                                </div>
+
+
+
+                                <div class="form-row m-b-20">
+
+                                    <label for="username">Postal Code</label>
+
+                                    <input type="text" class="form-control" formControlName="zip" 
+                                    [ngClass]="{'is-invalid': editMemberForm.controls['zip'].status == 'INVALID' && editMemberForm.controls['zip'].touched}" value="M5J 2N8"
+                                        autocomplete="off">
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label>User Bio</label>
+                                    <input type="text" class="form-control" 
+                                    [ngClass]="{'is-invalid': editMemberForm.controls['bio'].status == 'INVALID' && editMemberForm.controls['bio'].touched}"
+                                    placeholder="Your Bio" formControlName="bio">
+                                </div>
+
+
+                                <!-- <div class="form-row m-b-20">
+
+                                    <label for="username">Change Member Type</label>
+
+                                    <select class="form-control custom-select" formControlName="userType"
+                                        onchange="memberstatus(this.value)">
+                                        
+                                        <option value="2">User</option>
+                                        <option value="1">Subadmin</option>
+                                        <option value="0">Admin</option>
+                                        
+                                        
+                                    </select>
+
+                                </div> -->
+
+
+
+
+
+                                <div class="form-group">
+
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+
+                                </div>
+
+                            </form>
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+
+
+
+
+            </div>
+
+
+
+            <div class="col-lg-4">
+
+
+
+                <div class="card m-b-30">
+
+                    <div class="card-header">
+
+                        <div class="avatar mr-2 avatar-xs">
+
+                            <div class="avatar-title bg-dark rounded-circle">
+
+                                <i class="mdi mdi-information-variant mdi-18px"></i>
+
+                            </div>
+
+                        </div>
+
+                        User Information
+
+                    </div>
+
+                    <div class="list-group list  list-group-flush" *ngIf="memberDetails">
+
+
+
+
+
+                        <div class="list-group-item ">
+
+                            <i class="mdi mdi-email"></i> Email: {{memberDetails.email}}
+                        </div>
+
+                        <div class="list-group-item ">
+
+                            <i class="mdi mdi-home-map-marker"></i> Address: {{memberDetails.residentAddress}}
+                        </div>
+
+                        <div class="list-group-item ">
+
+                            <i class="mdi mdi mdi-city"></i> Country: {{memberDetails.country?.name}}
+                        </div>
+                        <div class="list-group-item ">
+
+                            <i class="mdi mdi mdi-city"></i> State: {{memberDetails.state?.name}}
+                        </div>
+
+                        <div class="list-group-item ">
+
+                            <i class="mdi mdi mdi-city"></i> City: {{memberDetails.city?.name}}
+                        </div>
+
+
+
+
+
+                        <div class="list-group-item ">
+
+                            <i class="mdi mdi-contact-mail"></i> Postal Code: {{memberDetails.zip}}
+                        </div>
+
+                        <div class="list-group-item ">
+
+                            <i class="mdi mdi-cellphone-basic"></i> Phone: {{memberDetails.mobile}}
+                        </div>
+
+
+
+
+                    </div>
+
+                </div>
+
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>

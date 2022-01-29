@@ -1,0 +1,581 @@
+<aside class="admin-sidebar sidebar-show">
+    <div class="admin-sidebar-brand">
+        <!-- begin sidebar branding-->
+        <img class="admin-brand-logo" src="assets/img/logo.png" width="80" alt="atmos Logo">
+        <!-- end sidebar branding-->
+        <div class="ml-auto">
+            <!-- sidebar pin-->
+            <!-- <a href="#" class="admin-pin-sidebar btn-ghost btn btn-rounded-circle"></a> -->
+            <!-- sidebar close for mobile device-->
+            <!-- <a href="#" class="admin-close-sidebar"></a> -->
+        </div>
+    </div>
+    <div class="scroll-wrapper admin-sidebar-wrapper js-scrollbar">
+        <ul class="menu">
+            <li class="menu-item "  [routerLinkActive]="['active']">
+                <a [routerLink]="'/dashboard'"  class="open-dropdown menu-link">
+                    <span class="menu-label">
+                        <span class="menu-name">Dashboard
+                        </span>
+
+                    </span>
+                    <span class="menu-icon">
+                        <i class="icon-placeholder mdi mdi-shape-outline "></i>
+                    </span>
+                </a>
+                <!--submenu-->
+
+            </li>
+            <li class="menu-item" [ngClass]="{'active opened': router.url.includes('/mm/')}">
+                <a href="#" class="open-dropdown menu-link">
+                    <span class="menu-label">
+                        <span class="menu-name">Manage Members
+                            <span class="menu-arrow"></span>
+                        </span>
+
+                    </span>
+                    <span class="menu-icon">
+                        <i class="icon-placeholder mdi mdi-lead-pencil "></i>
+                    </span>
+                </a>
+                <!--submenu-->
+                <ul class="sub-menu" [ngClass]="{'d-block': router.url.includes('/mm/')}" >
+
+                    <li class="menu-item" >
+                        <a [routerLink]="'/mm/view-members'" [ngClass]="{'active': router.url.includes('/mm/view-members')  || router.url.includes('/mm/member-details') || router.url.includes('/mm/edit-member')}" class=" menu-link">
+                            <span class="menu-label">
+                                <span class="menu-name">View Members
+                                </span>
+                            </span>
+                            <span class="menu-icon">
+
+                                <i class="icon-placeholder mdi mdi-checkbook "></i>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a [routerLink]="'/mm/add-new-member'" [routerLinkActive]="['active']"  class=" menu-link">
+                            <span class="menu-label">
+                                <span class="menu-name">Add New Member
+                                </span>
+                            </span>
+                            <span class="menu-icon">
+
+                                <i class="icon-placeholder mdi mdi-checkbook "></i>
+                            </span>
+                        </a>
+                    </li>
+                    <!-- <li class="menu-item">
+                        <a [routerLink]="'mm/review-flagged-members'"  [routerLinkActive]="['active']" class=" menu-link">
+                            <span class="menu-label">
+                                <span class="menu-name">Review Flagged Members
+                                </span>
+                            </span>
+                            <span class="menu-icon">
+
+                                <i class="icon-placeholder mdi mdi-checkbook "></i>
+                            </span>
+                        </a>
+                    </li> -->
+
+
+                </ul>
+            </li>
+            <li class="menu-item " [ngClass]="{'active opened': router.url.includes('/em/')}">
+                <a href="#" class="open-dropdown menu-link">
+                    <span class="menu-label">
+                        <span class="menu-name">Manage Events
+                            <span class="menu-arrow"></span>
+                        </span>
+
+                    </span>
+                    <span class="menu-icon">
+                        <i class="icon-placeholder mdi mdi-lead-pencil "></i>
+                    </span>
+                </a>
+                <!--submenu-->
+                <ul class="sub-menu" [ngClass]="{'d-block': router.url.includes('/em/')}">
+
+                    <li class="menu-item">
+                        <a [routerLink]="'/em/view-events'" [routerLinkActive]="['active']"  class=" menu-link">
+                            <span class="menu-label">
+                                <span class="menu-name">View Events
+                                </span>
+                            </span>
+                            <span class="menu-icon">
+
+                                <i class="icon-placeholder mdi mdi-checkbook "></i>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a [routerLink]="'/em/view-past-events'" [routerLinkActive]="['active']"  class=" menu-link">
+                            <span class="menu-label">
+                                <span class="menu-name">View Past Events
+                                </span>
+                            </span>
+                            <span class="menu-icon">
+
+                                <i class="icon-placeholder mdi mdi-checkbook "></i>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a [routerLink]="'/em/add-new-event'" [routerLinkActive]="['active']"  class=" menu-link">
+                            <span class="menu-label">
+                                <span class="menu-name">Add New Event
+                                </span>
+                            </span>
+                            <span class="menu-icon">
+
+                                <i class="icon-placeholder mdi mdi-checkbook "></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+                </ul>
+            </li>
+            <li class="menu-item " [ngClass]="{'active opened': router.url.includes('/cs/')}">
+                <a href="#" class="open-dropdown menu-link">
+                    <span class="menu-label">
+                        <span class="menu-name">Manage Make/Model
+                            <span class="menu-arrow"></span>
+                        </span>
+
+                    </span>
+                    <span class="menu-icon">
+                        <i class="icon-placeholder mdi mdi-lead-pencil "></i>
+                    </span>
+                </a>
+                <!--submenu-->
+                <ul class="sub-menu" [ngClass]="{'d-block': router.url.includes('/cs/')}">
+
+                    <li class="menu-item">
+                        <a [routerLink]="'/cs/manage-make'" [routerLinkActive]="['active']"  class=" menu-link">
+                            <span class="menu-label">
+                                <span class="menu-name">Manage Make
+                                </span>
+                            </span>
+                            <span class="menu-icon">
+
+                                <i class="icon-placeholder mdi mdi-checkbook "></i>
+                            </span>
+                        </a>
+                    </li>
+
+                    <li class="menu-item">
+                        <a [routerLink]="'/cs/manage-model'" [routerLinkActive]="['active']"  class=" menu-link">
+                            <span class="menu-label">
+                                <span class="menu-name">Manage Model
+                                </span>
+                            </span>
+                            <span class="menu-icon">
+
+                                <i class="icon-placeholder mdi mdi-checkbook "></i>
+                            </span>
+                        </a>
+                    </li>
+
+                </ul>
+            </li>
+            <li class="menu-item " [ngClass]="{'active opened': router.url.includes('/participants/')}">
+                <a href="#" class="open-dropdown menu-link">
+                    <span class="menu-label">
+                        <span class="menu-name">Manage Participants
+                            <span class="menu-arrow"></span>
+                        </span>
+
+                    </span>
+                    <span class="menu-icon">
+                        <i class="icon-placeholder mdi mdi-lead-pencil "></i>
+                    </span>
+                </a>
+                <!--submenu-->
+                <ul class="sub-menu" [ngClass]="{'d-block': router.url.includes('/participants/')}">
+
+                    <li class="menu-item">
+                        <a [routerLink]="'/participants/view-participants'" [routerLinkActive]="['active']"  class=" menu-link">
+                            <span class="menu-label">
+                                <span class="menu-name">View Participants
+                                </span>
+                            </span>
+                            <span class="menu-icon">
+
+                                <i class="icon-placeholder mdi mdi-checkbook "></i>
+                            </span>
+                        </a>
+                    </li>
+
+                </ul>
+            </li>
+            <li class="menu-item " [ngClass]="{'active opened': router.url.includes('/tm/')}">
+                <a href="#" class="open-dropdown menu-link">
+                    <span class="menu-label">
+                        <span class="menu-name">Manage Tickets
+                            <span class="menu-arrow"></span>
+                        </span>
+
+                    </span>
+                    <span class="menu-icon">
+                        <i class="icon-placeholder mdi mdi-lead-pencil "></i>
+                    </span>
+                </a>
+                <!--submenu-->
+                <ul class="sub-menu" [ngClass]="{'d-block': router.url.includes('/tm/')}">
+                    <li class="menu-item">
+                        <a [routerLink]="'/tm/manage-ticket-types'" [routerLinkActive]="['active']"  class=" menu-link">
+                            <span class="menu-label">
+                                <span class="menu-name">Manage Ticket Type
+                                </span>
+                            </span>
+                            <span class="menu-icon">
+
+                                <i class="icon-placeholder mdi mdi-checkbook "></i>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a [routerLink]="'/tm/view-tickets'" [routerLinkActive]="['active']"  class=" menu-link">
+                            <span class="menu-label">
+                                <span class="menu-name">View Tickets
+                                </span>
+                            </span>
+                            <span class="menu-icon">
+
+                                <i class="icon-placeholder mdi mdi-checkbook "></i>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a [routerLink]="'/tm/create-ticket'" [routerLinkActive]="['active']"  class=" menu-link">
+                            <span class="menu-label">
+                                <span class="menu-name">Create Ticket
+                                </span>
+                            </span>
+                            <span class="menu-icon">
+
+                                <i class="icon-placeholder mdi mdi-checkbook "></i>
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="menu-item " [ngClass]="{'active opened': router.url.includes('/pm/')}">
+                <a href="#" class="open-dropdown menu-link">
+                    <span class="menu-label">
+                        <span class="menu-name">Manage Products
+                            <span class="menu-arrow"></span>
+                        </span>
+
+                    </span>
+                    <span class="menu-icon">
+                        <i class="icon-placeholder mdi mdi-lead-pencil "></i>
+                    </span>
+                </a>
+                <!--submenu-->
+                <ul class="sub-menu" [ngClass]="{'d-block': router.url.includes('/pm/')}">
+                    <li class="menu-item">
+                        <a [routerLink]="'/pm/manage-category'" [routerLinkActive]="['active']"  class=" menu-link">
+                            <span class="menu-label">
+                                <span class="menu-name">Manage Category
+                                </span>
+                            </span>
+                            <span class="menu-icon">
+
+                                <i class="icon-placeholder mdi mdi-checkbook "></i>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a [routerLink]="'/pm/manage-size'" [routerLinkActive]="['active']"  class=" menu-link">
+                            <span class="menu-label">
+                                <span class="menu-name">Manage Size
+                                </span>
+                            </span>
+                            <span class="menu-icon">
+
+                                <i class="icon-placeholder mdi mdi-checkbook "></i>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a [routerLink]="'/pm/manage-color'" [routerLinkActive]="['active']"  class=" menu-link">
+                            <span class="menu-label">
+                                <span class="menu-name">Manage Color
+                                </span>
+                            </span>
+                            <span class="menu-icon">
+
+                                <i class="icon-placeholder mdi mdi-checkbook "></i>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a [routerLink]="'/pm/manage-type'" [routerLinkActive]="['active']"  class=" menu-link">
+                            <span class="menu-label">
+                                <span class="menu-name">Manage Type
+                                </span>
+                            </span>
+                            <span class="menu-icon">
+
+                                <i class="icon-placeholder mdi mdi-checkbook "></i>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a [routerLink]="'/pm/manage-products'" [routerLinkActive]="['active']"  class=" menu-link">
+                            <span class="menu-label">
+                                <span class="menu-name">Manage Products
+                                </span>
+                            </span>
+                            <span class="menu-icon">
+
+                                <i class="icon-placeholder mdi mdi-checkbook "></i>
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="menu-item " [ngClass]="{'active opened': router.url.includes('/om/')}">
+                <a href="#" class="open-dropdown menu-link">
+                    <span class="menu-label">
+                        <span class="menu-name">Manage Orders
+                            <span class="menu-arrow"></span>
+                        </span>
+
+                    </span>
+                    <span class="menu-icon">
+                        <i class="icon-placeholder mdi mdi-lead-pencil "></i>
+                    </span>
+                </a>
+                <!--submenu-->
+                <ul class="sub-menu" [ngClass]="{'d-block': router.url.includes('/om/')}">
+
+
+                    <li class="menu-item">
+                        <a [routerLink]="'/om/view-orders'" [routerLinkActive]="['active']"  class=" menu-link">
+                            <span class="menu-label">
+                                <span class="menu-name">View Orders
+                                </span>
+                            </span>
+                            <span class="menu-icon">
+
+                                <i class="icon-placeholder mdi mdi-checkbook "></i>
+                            </span>
+                        </a>
+                    </li>
+
+                </ul>
+            </li>
+            <li class="menu-item " [ngClass]="{'active opened': router.url.includes('/homepage/')}">
+                <a href="#" class="open-dropdown menu-link">
+                    <span class="menu-label">
+                        <span class="menu-name">Manage Homepage
+                            <span class="menu-arrow"></span>
+                        </span>
+
+                    </span>
+                    <span class="menu-icon">
+                        <i class="icon-placeholder mdi mdi-lead-pencil "></i>
+                    </span>
+                </a>
+                <!--submenu-->
+                <ul class="sub-menu" [ngClass]="{'d-block': router.url.includes('/homepage/')}">
+
+
+                    <li class="menu-item">
+                        <a [routerLink]="'/homepage/manage-social-media'" [routerLinkActive]="['active']"  class=" menu-link">
+                            <span class="menu-label">
+                                <span class="menu-name">Manage Social Media
+                                </span>
+                            </span>
+                            <span class="menu-icon">
+
+                                <i class="icon-placeholder mdi mdi-checkbook "></i>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a [routerLink]="'/homepage/manage-home-grid'" [routerLinkActive]="['active']"  class=" menu-link">
+                            <span class="menu-label">
+                                <span class="menu-name">Manage Home Grid
+                                </span>
+                            </span>
+                            <span class="menu-icon">
+
+                                <i class="icon-placeholder mdi mdi-checkbook "></i>
+                            </span>
+                        </a>
+                    </li>
+
+                </ul>
+            </li>
+            <li class="menu-item " [ngClass]="{'active opened': router.url.includes('/bm/')}">
+                <a href="#" class="open-dropdown menu-link">
+                    <span class="menu-label">
+                        <span class="menu-name">Manage Badges
+                            <span class="menu-arrow"></span>
+                        </span>
+
+                    </span>
+                    <span class="menu-icon">
+                        <i class="icon-placeholder mdi mdi-lead-pencil "></i>
+                    </span>
+                </a>
+                <!--submenu-->
+                <ul class="sub-menu" [ngClass]="{'d-block': router.url.includes('/bm/')}">
+                    <li class="menu-item">
+                        <a [routerLink]="'/bm/view-badges'" [routerLinkActive]="['active']"  class="menu-link">
+                            <span class="menu-label">
+                                <span class="menu-name">View Badges
+                                </span>
+                            </span>
+                            <span class="menu-icon">
+                                <i class="icon-placeholder mdi mdi-checkbook "></i>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a [routerLink]="'/bm/create-badge'" [routerLinkActive]="['active']"  class="menu-link">
+                            <span class="menu-label">
+                                <span class="menu-name">Create Badges
+                                </span>
+                            </span>
+                            <span class="menu-icon">
+                                <i class="icon-placeholder mdi mdi-checkbook "></i>
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="menu-item " [ngClass]="{'active opened': router.url.includes('/cm/')}">
+                <a href="#" class="open-dropdown menu-link">
+                    <span class="menu-label">
+                        <span class="menu-name">Manage Contents
+                            <span class="menu-arrow"></span>
+                        </span>
+
+                    </span>
+                    <span class="menu-icon">
+                        <i class="icon-placeholder mdi mdi-lead-pencil "></i>
+                    </span>
+                </a>
+                <!--submenu-->
+                <ul class="sub-menu" [ngClass]="{'d-block': router.url.includes('/cm/')}">
+                    <li class="menu-item">
+                        <a [routerLink]="'/cm/terms-conditions'" [routerLinkActive]="['active']"  class="menu-link">
+                            <span class="menu-label">
+                                <span class="menu-name">Term and Conditions
+                                </span>
+                            </span>
+                            <span class="menu-icon">
+                                <i class="icon-placeholder mdi mdi-checkbook "></i>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a [routerLink]="'/cm/refund-policy'" [routerLinkActive]="['active']"  class="menu-link">
+                            <span class="menu-label">
+                                <span class="menu-name">Refund Policy
+                                </span>
+                            </span>
+                            <span class="menu-icon">
+                                <i class="icon-placeholder mdi mdi-checkbook "></i>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a [routerLink]="'/cm/privacy-policy'" [routerLinkActive]="['active']"  class="menu-link">
+                            <span class="menu-label">
+                                <span class="menu-name">Privacy Policy
+                                </span>
+                            </span>
+                            <span class="menu-icon">
+                                <i class="icon-placeholder mdi mdi-checkbook "></i>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a [routerLink]="'/cm/sitemap'" [routerLinkActive]="['active']"  class="menu-link">
+                            <span class="menu-label">
+                                <span class="menu-name">Sitemap
+                                </span>
+                            </span>
+                            <span class="menu-icon">
+                                <i class="icon-placeholder mdi mdi-checkbook "></i>
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="menu-item " [ngClass]="{'active opened': router.url.includes('/sm/')}">
+                <a href="#" class="open-dropdown menu-link">
+                    <span class="menu-label">
+                        <span class="menu-name">Settings
+                            <span class="menu-arrow"></span>
+                        </span>
+
+                    </span>
+                    <span class="menu-icon">
+                        <i class="icon-placeholder mdi mdi-lead-pencil "></i>
+                    </span>
+                </a>
+                <!--submenu-->
+                <ul class="sub-menu" [ngClass]="{'d-block': router.url.includes('/sm/')}">
+                    <li class="menu-item">
+                        <a [routerLink]="'/sm/view-mail-contents'" [routerLinkActive]="['active']"  class="menu-link">
+                            <span class="menu-label">
+                                <span class="menu-name">Manage Mail Contents
+                                </span>
+                            </span>
+                            <span class="menu-icon">
+                                <i class="icon-placeholder mdi mdi-checkbook "></i>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a [routerLink]="'/sm/manage-taxes'" [routerLinkActive]="['active']"  class="menu-link">
+                            <span class="menu-label">
+                                <span class="menu-name">Manage Taxes
+                                </span>
+                            </span>
+                            <span class="menu-icon">
+                                <i class="icon-placeholder mdi mdi-checkbook "></i>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a [routerLink]="'/sm/manage-coupons'" [routerLinkActive]="['active']"  class="menu-link">
+                            <span class="menu-label">
+                                <span class="menu-name">Manage Coupons
+                                </span>
+                            </span>
+                            <span class="menu-icon">
+                                <i class="icon-placeholder mdi mdi-checkbook "></i>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a [routerLink]="'/sm/change-password'" [routerLinkActive]="['active']"  class="menu-link">
+                            <span class="menu-label">
+                                <span class="menu-name">Change Password
+                                </span>
+                            </span>
+                            <span class="menu-icon">
+                                <i class="icon-placeholder mdi mdi-checkbook "></i>
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            
+        </ul>
+        <!-- <div class="scroll-element scroll-x scroll-scrolly_visible" style=""><div class="scroll-element_outer"><div class="scroll-element_size"></div><div class="scroll-element_track"></div><div class="scroll-bar" style="width: 0px;"></div></div></div>
+        <div class="scroll-element scroll-y scroll-scrolly_visible" style=""><div class="scroll-element_outer"><div class="scroll-element_size"></div><div class="scroll-element_track"></div><div class="scroll-bar" style="height: 227px; top: 0px;"></div></div></div>  -->
+    </div>
+    <div style="text-align:center; font-size: 11px; padding-bottom:15px;" class="pt-2">Copyright © 2021 Blood Drag. <br>
+        <a href="https://www.thoughtmedia.com/clients/submitticket.php?step=2&deptid=1" target="_blank" style="text-decoration: underline; ">Get Support.</a></div>
+</aside>

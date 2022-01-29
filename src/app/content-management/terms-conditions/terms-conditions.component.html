@@ -1,0 +1,117 @@
+<section class="admin-content">
+
+    <div class="bg-dark m-b-30">
+
+        <div class="container">
+
+            <div class="row p-b-60 p-t-60">
+
+
+
+                <div class="col-md-6 text-white p-b-30">
+
+                    <div class="media">
+
+
+
+                        <h5 class="mt-0">Terms and Conditions</h5>
+
+
+
+                        <div class="media-body m-auto">
+
+
+
+
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+                
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="container pull-up">
+
+        <div class="row">
+
+            <div class="col-lg-12">
+
+                <!--message-->
+
+
+                <!--message-->
+
+
+
+
+
+                <!-- Single post-->
+
+                <div class="card m-b-30">
+
+                    <div class="card-header">
+
+
+                    </div>
+
+                    <div class="card-raw">
+
+                        <div class="card-body">
+
+
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-12">
+
+                        <div class="card-body ">
+
+                            <form [formGroup]="termsConditionsForm" #f="ngForm" autocomplete="off"
+                            (ngSubmit)="updateDetails(f)">
+                            
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <!-- <label>Terms and Conditions</label> -->
+                                    <textarea formControlName="termsAndConditions" 
+                                    [ngClass]="{'is-invalid': termsConditionsForm.controls['termsAndConditions'].status == 'INVALID' && termsConditionsForm.controls['termsAndConditions'].touched}" id="termsConditions">
+                                    </textarea>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Update</button>
+
+                        </form>
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+
+
+
+
+            </div>
+
+
+
+        </div>
+
+    </div>
+
+</section>

@@ -1,0 +1,275 @@
+<section class="admin-content">
+    <div class="bg-dark">
+
+        <div class="container  m-b-30">
+
+            <div class="row">
+
+                <div class="col-6 text-white p-t-40 p-b-90">
+
+
+
+                    <h4 class="">Manage Product Details</h4>
+
+                    <p class="opacity-75 "></p>
+
+                </div>
+                <div class="col-6 text-white p-t-40 p-b-90">
+
+                    <a [routerLink]="['/pm/manage-products']" routerLinkActive="router-link-active" class="btn  m-b-30 ml-2 mr-2 btn-success float-right"> <i class="mdi mdi-arrow-left-bold"></i> Back </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    <div class="container  pull-up">
+        <div class="row">
+            <div class="col-lg-12">
+
+
+                <div class="card m-b-30">
+                    <div class="card-header">
+                        <h5 class="m-b-0">
+                            Manage Product Details
+                        </h5>
+                    </div>
+                    <div class="card-body ">
+                        <!--Following uses  .form-dark class on parent to make controls appear -->
+                        <!--transparent in the container-->
+                        <form [formGroup]="productForm" #f="ngForm" autocomplete="off"
+                            (ngSubmit)="createProduct(f)">
+                            <div class="form-row">
+                                <div class="form-group  col-md-6">
+                                    <label>Product Name</label>
+                                    <input type="text" [attr.disabled]="true" formControlName="itemTitle" class="form-control"
+                                        placeholder="Procuct Name">
+                                </div>
+                                <div class="form-group  col-md-6">
+                                    <label>Enter Model</label>
+                                    <input type="text"  [attr.disabled]="true" formControlName="model" class="form-control"
+                                        placeholder="Product Model">
+                                </div>
+                            </div>
+                            <div class="products">
+                                <h5 class="mt-4 mb-4">
+                                    Added Color and Price
+                                </h5>
+                                <mat-accordion class="example-headers-align">
+                                    <mat-expansion-panel *ngFor="let prod of childProducts;  let i = index" [expanded]="step === prod.id" (opened)="setStep(prod.id)" hideToggle>
+                                      <mat-expansion-panel-header>
+                                        <mat-panel-title>
+                                          {{colorNames(prod.colors)}}
+                                        </mat-panel-title>
+                                        <mat-panel-description>
+                                          {{getObjById(prod.size, sizeList)?.name}}
+                                        </mat-panel-description>
+                                      </mat-expansion-panel-header>
+                                      <div class="create-new">
+                                        <h5 class="mt-4 mb-4">
+                                            Add Color and Price
+                                        </h5>
+                                        <div class="form-row form-group">
+                                            <div class="form-group  col-md-6">
+                                                <label class="d-block">Select Color</label>
+                                                <div class="tag-input" *ngFor="let col of prod.colorList;" style="margin-right: 10px;">
+                                                    <input class="cat" name="color" [id]="'chkacc'+ col.id + i" type="checkbox" [checked]="col.selected" (change)="col.selected= !col.selected">
+                                                    <label [attr.for]="'chkacc'+ col.id + i">{{col.name}}</label>
+                                                </div>
+                                            </div>  
+                                            <div class="form-group  col-md-6">
+                                                <label class="d-block">Select Size</label>
+                                                <mat-radio-group [(ngModel)]="prod.size" [ngModelOptions]="{standalone: true}">
+                                                    <mat-radio-button class="example-margin p-1 ml-3l"  *ngFor="let size of sizeList" [checked]="prod.size == size.id" [value]="size.id">{{size.name}}</mat-radio-button>
+                                                </mat-radio-group>
+                                            </div> 
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group  col-md-6">
+                                                <label>Price</label>
+                                                <input type="text" [(ngModel)]="prod.price" [ngModelOptions]="{standalone: true}" class="form-control"
+                                                    placeholder="Price">
+                                            </div>
+                                            <div class="form-group  col-md-6">
+                                                <label>Available Quantity</label>
+                                                <input type="text" [(ngModel)]="prod.availableQuantity" [ngModelOptions]="{standalone: true}" class="form-control"
+                                                    placeholder="Available Quantity">
+                                            </div>
+                                        </div>
+                                       
+                                        
+                                        <div class="form-row">
+                                            <div class="form-group  col-md-6">
+                                                <label class="d-block">Dimension</label>
+                                                <div class="row">
+                                                    <div class="col-sm-4">
+                                                        L&nbsp;
+                                                        <input type="text"  [(ngModel)]="prod.dimensionL" [ngModelOptions]="{standalone: true}" class="form-control"
+                                                    placeholder="Length">
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        W&nbsp;
+                                                        <input type="text"  [(ngModel)]="prod.dimensionW" [ngModelOptions]="{standalone: true}" class="form-control"
+                                                    placeholder="Width">
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        D&nbsp;
+                                                        <input type="text"  [(ngModel)]="prod.dimensionD" [ngModelOptions]="{standalone: true}" class="form-control"
+                                                    placeholder="Depth">
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+                                            <div class="form-group  col-md-6">
+                                                <label class="d-block">Weight</label>
+                                                (in kg) (eg: 0.5,1,1.2)
+                                                <input type="text" [pattern]="onlyNumberRegex" [(ngModel)]="prod.weight" [ngModelOptions]="{standalone: true}" class="form-control"
+                                                    placeholder="Weight">
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label style="display: block;">Product Images</label>
+                                                <label class="avatar-input" *ngFor="let pic of prod.images; let i=index">
+                                                    <i class="fa fa-times delete-icon" aria-hidden="true" (click)="removeProdImage(i, prod)"></i>
+                                                    <span class="avatar avatar-xxl">
+                                                        <img [src]="productImageBaseUrl + pic" alt="..." class="avatar-img">
+                                                    </span>
+                                                
+            
+                                                </label>
+                                                <div class="input-group mb-3">
+            
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text" id="inputGroupFileAddon01">Max 5Mb</span>
+                                                    </div>
+                                                    <div class="custom-file">
+                                                        <input type="file" class="custom-file-input" id="inputGroupFile01" (change)="readFileAccordian(prod, $event)" multiple>
+                                                        <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                      
+                                      <mat-action-row>
+                                          <div class="text-center" style="display: block; width: 100%;">
+                                            <button type="button" class="btn btn-danger mr-3" (click)="deleteProduct(prod)">Delete</button>
+                                            <button type="button" class="btn btn-primary" (click)="updateProduct(prod)">Update</button>
+                                          </div>
+                                        
+                                      </mat-action-row>
+                                    </mat-expansion-panel>
+                                  
+                                </mat-accordion>
+                            </div>
+                            <div class="create-new">
+                                <h5 class="mt-4 mb-4">
+                                    Add Color and Price
+                                </h5>
+                                <div class="form-row form-group">
+                                    <div class="form-group  col-md-6">
+                                        <label class="d-block">Select Color</label>
+                                        <div class="tag-input" *ngFor="let col of colorList" style="margin-right: 10px;">
+                                            <input class="cat" name="color" [id]="'chk'+ col.id" type="checkbox" [checked]="col.selected" (change)="col.selected= !col.selected">
+                                            <label [attr.for]="'chk'+ col.id">{{col.name}}</label>
+                                        </div>
+                                    </div>  
+                                    <div class="form-group  col-md-6">
+                                        <label class="d-block">Select Size</label>
+                                        <!-- <div class="tag-input" *ngFor="let size of sizeList" style="margin-right: 10px;">
+                                            <input class="type" name="sizes"  [checked]="size.selected" (change)="size.selected= !size.selected" [id]="'chkt'+ type.id" type="checkbox">
+                                            <label [attr.for]="'chkt'+ size.id">{{size.name}}</label>
+                                        </div> -->
+                                        <mat-radio-group formControlName="size">
+                                            <mat-radio-button class="example-margin p-1 ml-3l"  *ngFor="let size of sizeList" [checked]="productForm.value.size === size.id" [value]="size.id">{{size.name}}</mat-radio-button>
+                                        </mat-radio-group>
+                                    </div> 
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group  col-md-6">
+                                        <label>Price</label>
+                                        <input type="text" formControlName="price" class="form-control"
+                                            placeholder="Price">
+                                    </div>
+                                    <div class="form-group  col-md-6">
+                                        <label>Available Quantity</label>
+                                        <input type="text" formControlName="availableQuantity" class="form-control"
+                                            placeholder="Available Quantity">
+                                    </div>
+                                </div>
+                               
+                                
+                                <div class="form-row">
+                                    <div class="form-group  col-md-6">
+                                        <label class="d-block">Dimension</label>
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                L&nbsp;
+                                                <input type="text"  formControlName="dimensionL" class="form-control"
+                                            placeholder="Length">
+                                            </div>
+                                            <div class="col-sm-4">
+                                                W&nbsp;
+                                                <input type="text"  formControlName="dimensionW" class="form-control"
+                                            placeholder="Width">
+                                            </div>
+                                            <div class="col-sm-4">
+                                                D&nbsp;
+                                                <input type="text"  formControlName="dimensionD" class="form-control"
+                                            placeholder="Depth">
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="form-group  col-md-6">
+                                        <label class="d-block">Weight</label>
+                                        (in kg) (eg: 0.5,1,1.2)
+                                        <input type="text" [pattern]="onlyNumberRegex" formControlName="weight" class="form-control"
+                                            placeholder="Weight">
+                                        
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label style="display: block;">Product Images</label>
+                                        <label class="avatar-input" *ngFor="let pic of productForm.value.images; let i=index">
+                                            <i class="fa fa-times delete-icon" aria-hidden="true" (click)="removeImage(i)"></i>
+                                            <span class="avatar avatar-xxl">
+                                                <img [src]="productImageBaseUrl + pic" alt="..." class="avatar-img">
+                                            </span>
+                                        
+    
+                                        </label>
+                                        <div class="input-group mb-3">
+    
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="inputGroupFileAddon01">Max 5Mb</span>
+                                            </div>
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" id="inputGroupFile01" (change)="readFile($event)" multiple>
+                                                <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+
+                            <button type="submit" class="btn btn-primary">Submit</button>
+
+                        </form>
+                    </div>
+                </div>
+                <!--widget card ends-->
+
+
+            </div>
+        </div>
+
+
+    </div>
+</section>

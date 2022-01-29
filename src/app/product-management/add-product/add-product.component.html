@@ -1,0 +1,144 @@
+<section class="admin-content">
+    <div class="bg-dark">
+
+        <div class="container  m-b-30">
+
+            <div class="row">
+
+                <div class="col-12 text-white p-t-40 p-b-90">
+
+
+
+                    <h4 class="">Add New Product</h4>
+
+                    <p class="opacity-75 "></p>
+
+
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    <div class="container  pull-up">
+        <div class="row">
+            <div class="col-lg-12">
+
+
+                <div class="card m-b-30">
+                    <div class="card-header">
+                        <h5 class="m-b-0">
+                            Add New Product
+                        </h5>
+                    </div>
+                    <div class="card-body ">
+                        <!--Following uses  .form-dark class on parent to make controls appear -->
+                        <!--transparent in the container-->
+                        <form [formGroup]="productForm" #f="ngForm" autocomplete="off"
+                            (ngSubmit)="createProduct(f)">
+                            <div class="form-row">
+                                <div class="form-group  col-md-4">
+                                    <label>Product Name</label>
+                                    <input type="text" formControlName="itemTitle" class="form-control"
+                                        placeholder="Product Name">
+                                </div>
+                                <div class="form-group  col-md-4">
+                                    <label>Enter Model</label>
+                                    <input type="text" formControlName="model" class="form-control"
+                                        placeholder="Product Model">
+                                </div>
+                                <div class="form-group  col-md-4">
+                                    <label>Enter Price</label>
+                                    <input type="text" formControlName="price" class="form-control"
+                                        placeholder="Product Price">
+                                </div>
+                            </div>
+
+                            <div class="form-row form-group">
+                                <div class="form-group  col-md-12">
+                                    <label class="d-block">Select Category</label>
+                                    <div class="tag-input" *ngFor="let cat of categoryList" style="margin-right: 10px;">
+                                        <input class="cat" name="category" [id]="'chk'+ cat.id" type="checkbox" [checked]="cat.selected" (change)="cat.selected= !cat.selected">
+                                        <label [attr.for]="'chk'+ cat.id">{{cat.name}}</label>
+                                    </div>
+                                </div>  
+                            </div>
+                            <div class="form-row form-group">
+                                <div class="form-group  col-md-12">
+                                    <label class="d-block">Select Types</label>
+                                    <div class="tag-input" *ngFor="let type of typeList" style="margin-right: 10px;">
+                                        <input class="type" name="types"  [checked]="type.selected" (change)="type.selected= !type.selected" [id]="'chkt'+ type.id" type="checkbox">
+                                        <label [attr.for]="'chkt'+ type.id">{{type.name}}</label>
+                                    </div>
+                                </div>                      
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <label>Product Description</label>
+                                    <textarea formControlName="description" id="desc">
+                                    </textarea>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label style="display: block;">Product Images</label>
+                                    <label class="avatar-input" *ngFor="let pic of productForm.value.images; let i=index">
+                                        <i class="fa fa-times delete-icon" aria-hidden="true" (click)="removeImage(i)"></i>
+                                        <span class="avatar avatar-xxl">
+                                            <img [src]="productImageBaseUrl + pic" alt="..." class="avatar-img">
+                                        </span>
+                                    
+
+                                    </label>
+                                    <div class="input-group mb-3">
+
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="inputGroupFileAddon01">Max 5Mb</span>
+                                        </div>
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" id="inputGroupFile01" (change)="readFile($event)" multiple>
+                                            <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label class="d-block">Product Tags</label>
+                                    <mat-form-field class="example-chip-list">
+                                        
+                                        <mat-chip-list #chipList >
+                                          <mat-chip *ngFor="let tag of productTags" (removed)="remove(tag)">
+                                            {{tag}}
+                                            <button matChipRemove>
+                                              <mat-icon>cancel</mat-icon>
+                                            </button>
+                                          </mat-chip>
+                                          <input
+                                                 [matChipInputFor]="chipList"
+                                                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                                 [matChipInputAddOnBlur]="addOnBlur"
+                                                 (matChipInputTokenEnd)="add($event)">
+                                        </mat-chip-list>
+                                      </mat-form-field>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Add Product</button>
+
+                        </form>
+                    </div>
+                </div>
+                <!--widget card ends-->
+
+
+            </div>
+        </div>
+
+
+    </div>
+</section>

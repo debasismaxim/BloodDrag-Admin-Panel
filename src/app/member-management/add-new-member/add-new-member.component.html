@@ -1,0 +1,167 @@
+<section class="admin-content">
+    <div class="bg-dark">
+
+        <div class="container  m-b-30">
+
+            <div class="row">
+
+                <div class="col-12 text-white p-t-40 p-b-90">
+
+
+
+                    <h4 class="">Add New Member</h4>
+
+                    <p class="opacity-75 "></p>
+
+
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    <div class="container  pull-up">
+        <div class="row">
+            <div class="col-lg-12">
+
+
+                <div class="card m-b-30">
+                    <div class="card-header">
+                        <h5 class="m-b-0">
+                            Add New Member
+                        </h5>
+                    </div>
+                    <div class="card-body ">
+                        <!--Following uses  .form-dark class on parent to make controls appear -->
+                        <!--transparent in the container-->
+                        <form [formGroup]="memberForm"
+                        #f="ngForm"
+                        autocomplete="off"
+                        (ngSubmit)="f.valid ? createMember(f): ''">
+                            <div class="form-row">
+                                <div class="form-group  col-md-6">
+                                    <label>First Name</label>
+                                    <input type="text" (ngModelChange)="change()" formControlName="firstName" 
+                                    [ngClass]="{'is-invalid': memberForm.controls['firstName'].status == 'INVALID' && memberForm.controls['firstName'].touched}"
+                                     class="form-control" placeholder="First Name">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>Last Name</label>
+                                    <input type="text" formControlName="lastName" 
+                                    [ngClass]="{'is-invalid': memberForm.controls['lastName'].status == 'INVALID' && memberForm.controls['lastName'].touched}"
+                                    class="form-control" placeholder="Last Name"  >
+                                </div>
+                            </div>
+                            
+                            
+                            <div class="form-row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Email</label>
+                                        <input type="email" formControlName="email" 
+                                        [ngClass]="{'is-invalid': memberForm.controls['email'].status == 'INVALID' && memberForm.controls['email'].touched}"
+                                        class="form-control" placeholder="Email">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Password</label>
+                                        <input type="password"  
+                                        [ngClass]="{'is-invalid': memberForm.controls['password'].status == 'INVALID' && memberForm.controls['password'].touched}"
+                                        formControlName="password" class="form-control" placeholder="Password" >
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group col-md-6">
+                                    <label style="display: block;">Profile Pic</label>
+                                    <label class="avatar-input">
+                                        <i class="fa fa-times delete-icon" *ngIf="memberForm.value.profilePic" aria-hidden="true" (click)="removeImage($event)"></i>
+                                        <span class="avatar avatar-xxl">
+                                            <img [src]="memberForm.value.profilePic ? profileImageBaseUrl + memberForm.value.profilePic: 'assets/img/users/default.jpg'" alt="..."
+                                                 class="avatar-img" id="avatar-img">
+                                             <span class="avatar-input-icon">
+                                            <i class=" mdi mdi-progress-upload mdi-24px"></i>
+                                        </span>
+                                        </span>
+                                        <input type="file" class="avatar-file-picker" (change)="readFile($event)" >
+    
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="mobile">Phone</label>
+                                    <input type="text" class="form-control"
+                                    [ngClass]="{'is-invalid': memberForm.controls['mobile'].status == 'INVALID' && memberForm.controls['mobile'].touched}"
+                                    id="phone" formControlName="mobile"
+                                        placeholder="+1 13 456 1879" autocomplete="off">
+    
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>Address</label>
+                                    <input type="text" class="form-control" formControlName="residentAddress"
+                                    [ngClass]="{'is-invalid': memberForm.controls['residentAddress'].status == 'INVALID' && memberForm.controls['residentAddress'].touched}"
+                                    placeholder="1234 Main St">
+                                </div>
+                            </div>
+                            
+                            
+                            <div class="form-row">
+                                <div class="form-group col-md-3">
+                                    <label>Country</label>
+                                    <select class="form-control" 
+                                    [ngClass]="{'is-invalid': memberForm.controls['country'].status == 'INVALID' && memberForm.controls['country'].touched}"
+                                    formControlName="country" (ngModelChange)="getStateListByCountry(memberForm.value.country)">
+                                        <option value="" selected disabled>Select Country</option>
+                                        <option *ngFor="let country of countryList" [value]="country.name">{{country?.name}}</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label>State/Province</label>
+                                    <select class="form-control" formControlName="state"
+                                    [ngClass]="{'is-invalid': memberForm.controls['state'].status == 'INVALID' && memberForm.controls['state'].touched}"
+                                    (ngModelChange)="getCityListByState(memberForm.value.state, memberForm.value.country)">
+                                        <option  value="" selected disabled>Select State/Province</option>
+                                        <option *ngFor="let state of stateList" [value]="state.name">{{state?.name}}</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label>City</label>
+                                    <select class="form-control" 
+                                    [ngClass]="{'is-invalid': memberForm.controls['city'].status == 'INVALID' && memberForm.controls['city'].touched}"
+                                     formControlName="city">
+                                        <option value="" selected disabled>Select City</option>
+                                        <option *ngFor="let city of cityList" [value]="city.name">{{city?.name}}</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group col-md-3">
+                                    <label>Postal Code</label>
+                                    <input type="text" class="form-control"
+                                    [ngClass]="{'is-invalid': memberForm.controls['zip'].status == 'INVALID' && memberForm.controls['zip'].touched}"
+                                    placeholder="Zipcode" formControlName="zip">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>User Bio</label>
+                                <input type="text" class="form-control" 
+                                [ngClass]="{'is-invalid': memberForm.controls['bio'].status == 'INVALID' && memberForm.controls['bio'].touched}"
+                                placeholder="Your Bio" formControlName="bio">
+                            </div>
+
+                            <button type="submit" [disabled]="f.invalid" class="btn btn-primary">Create Member</button>
+
+                        </form>
+                    </div>
+                </div>
+                <!--widget card ends-->
+
+
+            </div>
+        </div>
+
+
+    </div>
+</section>

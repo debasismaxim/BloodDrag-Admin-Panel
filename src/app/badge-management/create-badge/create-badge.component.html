@@ -1,0 +1,171 @@
+<section class="admin-content">
+    <div class="bg-dark">
+
+        <div class="container  m-b-30">
+
+            <div class="row">
+
+                <div class="col-12 text-white p-t-40 p-b-90">
+
+
+
+                    <h4 class="">Create Badge</h4>
+
+                    <p class="opacity-75 "></p>
+
+
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    <div class="container  pull-up">
+        <div class="row">
+            <div class="col-lg-12">
+
+
+                <div class="card m-b-30">
+                    <div class="card-header">
+                        <h5 class="m-b-0">
+                            Create Badge
+                        </h5>
+                    </div>
+                    <div class="card-body ">
+                        <!--Following uses  .form-dark class on parent to make controls appear -->
+                        <!--transparent in the container-->
+                        <form [formGroup]="createBadgeForm"
+                        #f="ngForm"
+                        autocomplete="off"
+                        (ngSubmit)="f.valid ? createBadge(f): ''">
+
+                            <div class="form-row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Title</label>
+                                        <input type="text" formControlName="title" 
+                                        [ngClass]="{'is-invalid': createBadgeForm.controls['title'].status == 'INVALID' && createBadgeForm.controls['title'].touched}"
+                                        class="form-control" placeholder="Badge Title">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Is Sponsored?</label>
+                                        <!-- <input type="radio" style="margin-left: 20px" id="html" name="isSponsored" formControlName="isSponsored" [value]="1">
+                                        <label for="html" class="radio-label">Yes</label>
+                                        <input type="radio" id="css" style="margin-left: 10px" name="isSponsored" formControlName="isSponsored" [value]="0">
+                                        <label for="css" class="radio-label">No</label> -->
+
+                                        <select class="form-control" 
+                                        [ngClass]="{'is-invalid': createBadgeForm.controls['isSponsored'].status == 'INVALID' && createBadgeForm.controls['isSponsored'].touched}"
+                                        formControlName="isSponsored" >
+                                            <option value="" selected disabled>Select </option>
+                                            <option [value]="true"  >Yes </option>
+                                            <option [value]="false" >No </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group col-md-6">
+                                    <label style="display: block;">Badge Logo</label>
+                                    <label class="avatar-input">
+                                        <span class="avatar avatar-xl">
+                                            <img [src]="createBadgeForm.value.icon? badgeIconBaseUrl+createBadgeForm.value.icon:'assets/img/badges/default.jpg'" alt="..."
+                                                 class="avatar-img">
+                                             <span class="avatar-input-icon">
+                                            <i class=" mdi mdi-progress-upload mdi-24px"></i>
+                                        </span>
+                                        </span>
+                                        <input type="file" class="avatar-file-picker" (change)="readBadgeFile($event)" >
+    
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-row"  *ngIf="createBadgeForm.value.isSponsored">
+                                <div class="col-md-6">
+                                    <div class="form-group ">
+                                        <label for="mobile">Company Name</label>
+                                        <input type="text" class="form-control"
+                                        [ngClass]="{'is-invalid': createBadgeForm.controls['companyName'].status == 'INVALID' && createBadgeForm.controls['companyName'].touched}"
+                                        id="phone" formControlName="companyName"
+                                            placeholder="Sponsor Company Name" autocomplete="off">
+        
+                                    </div>
+                                    <div class="form-group ">
+                                        <label>External Link</label>
+                                        <input type="text" class="form-control" formControlName="extLink"
+                                        [ngClass]="{'is-invalid': createBadgeForm.controls['extLink'].status == 'INVALID' && createBadgeForm.controls['extLink'].touched}"
+                                        placeholder="External Link">
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group col-md-6">
+                                    <label style="display: block;">Company Logo</label>
+                                    <label class="avatar-input">
+                                        <span class="avatar avatar-xl">
+                                            <img [src]="createBadgeForm.value.companyLogo? companyIconBaseUrl+createBadgeForm.value.companyLogo:'assets/img/badges/default.jpg'" alt="..."
+                                                 class="avatar-img1">
+                                             <span class="avatar-input-icon">
+                                            <i class=" mdi mdi-progress-upload mdi-24px"></i>
+                                        </span>
+                                        </span>
+                                        <input type="file" class="avatar-file-picker" (change)="readCompanyLogo($event)" >
+    
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row" >
+                                <div class="form-group col-md-6">
+                                    <label>Expiry Date</label>
+                                    <input type="text" class="js-datepicker1 form-control" formControlName="expiryDate"
+                                        placeholder="Select Expiry Date" [(ngModel)]="expiryDate">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label>Badge Type</label>
+                                    <select class="form-control" 
+                                    [ngClass]="{'is-invalid': createBadgeForm.controls['badgeType'].status == 'INVALID' && createBadgeForm.controls['badgeType'].touched}"
+                                    formControlName="badgeType" >
+                                        <option value="" selected disabled>Select Badge Type</option>
+                                        <option [value]="type.key" *ngFor="let type of badgeTypes" >{{type.name}}</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-6" *ngIf="createBadgeForm.value.badgeType == 1">
+                                    <label for="mobile">On Year Completion</label>
+                                    <input type="text" class="form-control"
+                                    [ngClass]="{'is-invalid': createBadgeForm.controls['yearCompletion'].status == 'INVALID' && createBadgeForm.controls['yearCompletion'].touched}"
+                                     formControlName="yearCompletion"
+                                        placeholder="Number of Year" autocomplete="off">
+    
+                                </div>
+                                <div class="form-group col-md-6" *ngIf="createBadgeForm.value.badgeType == 2 || createBadgeForm.value.badgeType == 3">
+                                    <label>Event Participation</label>
+                                    <select class="form-control" 
+                                    [ngClass]="{'is-invalid': createBadgeForm.controls['eventParticipation'].status == 'INVALID' && createBadgeForm.controls['eventParticipation'].touched}"
+                                    formControlName="eventParticipation" >
+                                        <option value="" selected disabled>Select Event</option>
+                                        <option [value]="event.id" *ngFor="let event of eventList" >{{event.name}}</option>
+                                    </select>
+                                </div>
+
+                            </div>
+                            
+
+                            <button type="submit" [disabled]="f.invalid" class="btn btn-primary">Create Badge</button>
+
+                        </form>
+                    </div>
+                </div>
+                <!--widget card ends-->
+
+
+            </div>
+        </div>
+
+
+    </div>
+</section>

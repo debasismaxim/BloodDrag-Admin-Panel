@@ -1,0 +1,72 @@
+<section class="admin-content">
+    <div class="bg-dark">
+
+        <div class="container  m-b-30">
+
+            <div class="row">
+
+                <div class="col-12 text-white p-t-40 p-b-90">
+
+
+
+                    <h4 class="">View Orders</h4>
+
+                    <p class="opacity-75 "></p>
+
+
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    <div class="container pull-up">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+
+                    <div class="card-body">
+                        <div class="table-responsive p-t-10">
+                            <table id="member" class="table   " style="width:100%">
+                                <thead>
+                                <tr>
+                                    <th>ORDER#</th>
+                                    <th>DATE</th>
+                                    
+                                    <th>NAME</th>
+                                    <th>TOTAL</th>
+                                    <th>PAYMENT</th>
+                                    <th>PAID BY</th>
+                                    <th>ORDER</th>
+                                    <th>ACTION</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr *ngFor="let order of allOrderList">
+                                    <td>{{order.orderId}}</td>
+                                    <td>{{order.updatedAt | date:'medium'}}</td>
+                                    <td> {{order.user}} </td>
+                                    
+                                    <td>{{order.price}}</td>
+                                    
+                                    <td>{{order.paymentStatus}}</td>
+                                    <td>{{order.paymentMethod}}</td>
+                                    <td>{{order.orderStatus}}</td>
+                                    <td>
+                                        <a style="font-size:14px;padding: 5px;" [routerLink]="['/om/edit-order', order.orderId ]" routerLinkActive="router-link-active">
+                                            View/Edit</a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

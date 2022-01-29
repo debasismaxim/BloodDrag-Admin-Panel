@@ -1,0 +1,173 @@
+<section class="admin-content">
+    <div class="bg-dark">
+
+        <div class="container  m-b-30">
+
+            <div class="row">
+
+                <div class="col-12 text-white p-t-40 p-b-90">
+                    <h4 class="">Manage Coupons</h4>
+                    <p class="opacity-75 "></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container pull-up">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+
+                        <div class="media">
+
+                            <div class="media-body m-auto">
+
+                                <h5 class="m-0"> Manage Coupon </h5>
+
+                                <div class="opacity-75 text-muted"></div>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="card-controls">
+
+                        </div>
+
+                    </div>
+                <div class="card-body ">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form [formGroup]="updateCouponForm"
+                            #f="ngForm"
+                            autocomplete="off"
+                            (ngSubmit)="f.valid ? updateCoupon(f): ''">
+            
+                                    <div class="form-row m-b-20">
+                                        <div class="form-group col-md-4">
+                                            <label for="code">Coupon Code</label>
+                                            <input type="text" class="form-control"
+                                            [ngClass]="{'is-invalid': updateCouponForm.controls['code'].status == 'INVALID' && updateCouponForm.controls['code'].touched}"
+                                            id="code" formControlName="code"
+                                                placeholder="Coupon Code">
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="code">Coupon Value</label>
+                                            <input type="text" class="form-control"
+                                            [ngClass]="{'is-invalid': updateCouponForm.controls['value'].status == 'INVALID' && updateCouponForm.controls['value'].touched}"
+                                            id="code" formControlName="value"
+                                                placeholder="Coupon Value">
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="username">Coupon Type</label>
+                                            <select required="" class="form-control " formControlName="unitType"
+                                            [ngClass]="{'is-invalid': updateCouponForm.controls['unitType'].status == 'INVALID' && updateCouponForm.controls['unitType'].touched}"
+                                            id="type-dropdown" >
+                                                <option *ngFor="let type of couponTypes" [value]="type">{{type}}</option>
+                
+                                            </select>
+                                        </div>
+                                    </div>
+            
+                                    <div class="form-row m-b-20">
+                                        <div class="form-group col-md-4">
+                                            <label for="useLimit">Use Limit</label>
+                                            <input type="text" class="form-control"
+                                            [ngClass]="{'is-invalid': updateCouponForm.controls['useLimit'].status == 'INVALID' && updateCouponForm.controls['useLimit'].touched}"
+                                            id="useLimit" formControlName="useLimit"
+                                                placeholder="Use Limit">
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label>Expiry Date</label>
+                                            <input type="text" class="js-datepicker1 form-control" formControlName="expiryDate"
+                                                placeholder="Select Expiry Date" [(ngModel)]="expiryDate">
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label class="example-margin d-block">Status:</label>
+                                            <mat-radio-group formControlName="status">
+                                                <mat-radio-button class="example-margin p-1" [checked]="updateCouponForm.value.status === 1" [value]="1">Active</mat-radio-button>
+                                                <mat-radio-button class="example-margin p-1 ml-3l" [checked]="updateCouponForm.value.status === 0" [value]="0"> Inactive</mat-radio-button>
+                                            </mat-radio-group>
+                                        </div>
+                                    </div>
+                                
+                                <div class="text-center">
+                                    <button type="submit" [disabled]="f.invalid" class="btn btn-primary">{{couponId? "Update": "Create"}}</button>
+            
+                                </div>
+            
+                                
+                            </form>
+                        </div>
+                    </div>
+
+                    
+
+                </div>
+</div>
+            </div>
+            <div class="col-12 m-t-20">
+                <div class="card">
+                    <div class="card-header">
+
+                        <div class="media">
+
+                            <div class="media-body m-auto">
+
+                                <h5 class="m-0"> Coupon List </h5>
+
+                                <div class="opacity-75 text-muted"></div>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="card-controls">
+
+                        </div>
+
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive p-t-10">
+                            <table id="member" class="table   " style="width:100%">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Code</th>
+                                    
+                                    <th>Value</th>
+                                    <th>Expiry Date</th>
+                                    <th>Use Limit</th>
+                                    <th>Action</th>
+                                    
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr *ngFor="let c of allCouponsList; let i=index">
+                                    <td>{{i+1}}</td>
+                                    <td> {{c.code}} </td>
+                                    
+                                    <td>{{c.value + " " + c.unitType}}</td>
+                                    
+                                    <td>{{c.expiryDate}}</td>
+                                    <td>{{c.useLimit}}</td>
+                                    <td>
+                                        <a style="font-size:18px;padding: 5px; cursor: pointer;" (click)="setEditForm(c)" ><i class="mdi mdi-square-edit-outline" title="Edit" alt="Edit"></i></a>
+                                        <a style="font-size:18px; cursor: pointer;" 
+                                        (click)="deleteById(c.id)"
+                                       ><i class="mdi mdi-delete-circle-outline" title="delete" alt="delete"></i></a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

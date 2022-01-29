@@ -1,0 +1,144 @@
+<section class="admin-content">
+    <div class="bg-dark">
+
+        <div class="container  m-b-30">
+
+            <div class="row">
+
+                <div class="col-12 text-white p-t-40 p-b-90">
+                    <h4 class="">Manage Models</h4>
+                    <p class="opacity-75 "></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container pull-up">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+
+                        <div class="media">
+
+                            <div class="media-body m-auto">
+
+                                <h5 class="m-0"> Manage Model </h5>
+
+                                <div class="opacity-75 text-muted"></div>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="card-controls">
+
+                        </div>
+
+                    </div>
+                <div class="card-body ">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form [formGroup]="updateModelForm"
+                            #f="ngForm"
+                            autocomplete="off"
+                            (ngSubmit)="f.valid ? updateModel(f): ''">
+                                <div class="form-row m-b-20">
+                                    <div class="form-group col-md-6 offset-md-3">
+                                        <label for="username">Make</label>
+                                        <select required="" class="form-control " formControlName="makeId"
+                                        [ngClass]="{'is-invalid': updateModelForm.controls['makeId'].status == 'INVALID' && updateModelForm.controls['makeId'].touched}"
+                                        id="type-dropdown" >
+                                        <option [ngValue]="''" selected>Select Make</option>
+                                            <option *ngFor="let make of makeList" [ngValue]="make.id">{{make.name}}</option>
+            
+                                        </select>
+                                    </div>
+                                </div>
+                                    <div class="form-row m-b-20">
+                                        <div class="form-group col-md-6 offset-md-3">
+                                            <label for="code">Model</label>
+                                            <input type="text" class="form-control"
+                                            [ngClass]="{'is-invalid': updateModelForm.controls['name'].status == 'INVALID' && updateModelForm.controls['name'].touched}"
+                                            id="code" formControlName="name"
+                                                placeholder="Enter Model">
+                                        </div>
+                                    </div>
+                                    
+            
+                                
+                                <div class="text-center">
+                                    <button type="submit" [disabled]="f.invalid" class="btn btn-primary">{{modelId? "Update": "Create"}}</button>
+            
+                                </div>
+            
+                                
+                            </form>
+                        </div>
+                    </div>
+
+                    
+
+                </div>
+</div>
+            </div>
+            <div class="col-12 m-t-20">
+                <div class="card">
+                    <div class="card-header">
+
+                        <div class="media">
+
+                            <div class="media-body m-auto">
+
+                                <h5 class="m-0"> Model List </h5>
+
+                                <div class="opacity-75 text-muted"></div>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="card-controls">
+
+                        </div>
+
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive p-t-10">
+                            <table id="member" class="table   " style="width:100%">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Make</th>
+                                    
+                                    <th>Model</th>
+                                    <th>Action</th>
+                                    
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr *ngFor="let c of allModelsList; let i=index">
+                                    <td>{{i+1}}</td>
+                                    <td> {{getMakeNameById(c.makeId)}} </td>
+                                    
+                                    <td>{{c.name}}</td>
+                                    
+                                    <td>
+                                        <a style="font-size:18px;padding: 5px; cursor: pointer;" (click)="setEditForm(c)" ><i class="mdi mdi-square-edit-outline" title="Edit" alt="Edit"></i></a>
+                                        <a style="font-size:18px; cursor: pointer;" 
+                                        (click)="deleteById(c.id)"
+                                       ><i class="mdi mdi-delete-circle-outline" title="delete" alt="delete"></i></a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

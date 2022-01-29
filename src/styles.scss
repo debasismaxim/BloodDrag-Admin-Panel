@@ -1,0 +1,49 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+.cdk-overlay-container .cdk-overlay-backdrop {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+    top: 0;
+    background-color: #00000061;
+}
+
+.cdk-global-overlay-wrapper {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 1000;
+    transform: translate(-50%, -50%);
+}
+select.ng-invalid {
+    color: #919cbe;
+}
+a.detail-link:hover {
+    text-decoration: underline;
+}
+.cursor-pointer {
+    cursor: pointer;
+}
+.mat-dialog-container {
+     background-color: #FFF;
+     z-index: 9999;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.mat-typography h5 {
+    font-size: 1.125rem;
+}
+.mat-typography h4 {
+    font-size: 1.35rem;
+}
+mat-form-field {
+    width: 100%;
+}
+.mat-form-field-infix {
+    border: 1px solid #ddd;
+}
+.mat-form-field-underline {
+    display: none;
+}

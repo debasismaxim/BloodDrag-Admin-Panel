@@ -1,0 +1,178 @@
+<section class="admin-content ">
+
+    <div class="bg-dark">
+
+        <div class="container  m-b-30">
+
+            <div class="row">
+
+                <div class="col-6 text-white p-t-40 p-b-90">
+
+                    <h4 class="">Manage Orders</h4>
+
+                    <p class="opacity-75 "></p>
+
+                </div>
+
+                <div class="col-6 text-white p-t-40 p-b-90">
+
+                  <a [routerLink]="['/om/view-orders' ]" routerLinkActive="router-link-active" class="btn  m-b-30 ml-2 mr-2 btn-success float-right"><i class="mdi mdi-left-arrow"></i> Back to Listing </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    
+
+    <div class="container  pull-up">
+
+
+
+        <div class="row" style="margin: 0 auto; width:100%; align-items: center;
+
+justify-content: center;">
+
+
+
+        <!--message-->
+
+        
+        <!--message-->
+
+    
+
+        <div class="col-lg-12">
+
+        <div class="card m-b-30">
+
+                <div class="card-header">
+
+                    <h5 class="m-b-0">
+
+                         View Order Details 
+
+                    </h5>
+
+                </div>
+
+                <div class="card-body" *ngIf="orderDetails">
+
+            <div class="table-responsive">
+
+                <table id="members" class="table" style="" *ngIf="orderDetails">
+                <tbody><tr>
+                <td>Order Date</td><td>:</td><td>{{orderDetails.orderDate}}</td></tr><tr>
+                <td>Customer Name</td><td>:</td><td>{{orderDetails.user}}</td></tr><tr>
+                <td>Customer Email</td><td>:</td><td>{{orderDetails.userDetails?.email}}</td></tr><tr>
+                <td>Phone#</td><td>:</td><td>{{orderDetails.userDetails?.mobile}}</td></tr><tr>
+                <td>State</td><td>:</td><td>{{orderDetails.userDetails?.state?.name}}</td></tr><tr>
+                <td>City</td><td>:</td><td>{{orderDetails.userDetails?.city?.name}}</td></tr><tr>
+                <td>Postal Code</td><td>:</td><td>{{orderDetails.userDetails?.zip}}</td></tr><tr>
+
+                </tr>
+                </tbody></table>
+
+                <table id="members" class="table   " style="width:100%">
+
+                    <thead>
+
+                    <tr>
+
+                        <th class="nosort">#</th>
+                        <th>Product Image</th>
+                        <th>Product Name</th>							
+                        
+                        <th>Size </th>
+                        <th>Color </th>
+
+                        <th>Qty</th>
+                        <th>Price</th>
+
+                        <th>Status</th>
+
+                    </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                    
+        <tr *ngFor="let prod of orderDetails.products; let i = index">
+
+            <td>{{i+1}}</td>
+            <td><a [routerLink]="['/om/viw-orders' ]" routerLinkActive="router-link-active"><img height="65" src="{{productImageBaseUrl+ prod.images[0]}}" width="auto"></a> </td>
+            <td>{{prod.productTitle + ", " + prod.productModel}}</td>
+            <td>{{prod.size[0].name}}</td>
+            <td>{{prod.colors[0].name}}</td>
+            <td>{{prod.quantity}}</td>
+            <td>${{prod.price}}</td>
+
+
+            <td><div class="status-toggle">
+                <input type="hidden" class="id" value="56">
+                <input type="hidden" class="oid" value="31">
+                <select name="booking_status" class="form-control booking_status" [(ngModel)]="prod.orderStatus" [ngModelOptions]="{standalone: true}" (ngModelChange)="updateOrderStatus(prod.orderStatus, prod._id)">
+                                            
+            <option *ngFor="let status of orderStatusList" [ngValue]="status.key">{{status.value}}</option>
+
+                                                
+                                                
+                                            </select>
+                                            <div class="spinner-border spinner-border-sm spinner" role="status" style="display:none;">
+                                            <span class="sr-only">Loading...</span>
+                                            </div>
+                                        </div></td>
+        </tr>
+
+
+
+                    
+                    </tbody>
+
+                </table>
+<table id="members" class="table" style="width:100%">
+<tbody><tr>
+<td>Sub Total</td><td>:</td><td>${{orderDetails.price}}</td></tr><tr>
+<td>Shipping</td><td>:</td><td>${{orderDetails.shippingPrice}}</td></tr><tr>
+<td>Tax</td><td>:</td><td>${{orderDetails.tax}}</td></tr><tr>
+<td>Coupon Code</td><td>:</td><td>{{orderDetails.couponCode}}</td></tr><tr>
+<td>Discount</td><td>:</td><td>${{orderDetails.discount}}</td></tr><tr>
+<td>Total Amount</td><td>:</td><td>${{ orderDetails.price + orderDetails.shippingPrice + orderDetails.tax - orderDetails.discount }}</td></tr><tr>
+<td>Payment Method</td><td>:</td><td>{{orderDetails.paymentMethod}}</td></tr><tr>
+<td>Payment Status</td><td>:</td><td><select name="pstatus" [(ngModel)]="orderDetails.paymentStatus" disabled>
+<option [ngValue]="false" selected="">Unpaid</option>
+<option [ngValue]="true">Paid</option></select></td></tr><!--<tr>
+<td>Order Status</td><td>:</td><td><select name="ostatus" onchange="orderstatus(this.value)">
+<option value="Placed" selected>Placed</option>
+<option value="Shipped" >Shipped</option>
+<option value="Delivered" >Delivered</option>
+<option value="Cancelled" >Cancelled</option>
+</select></td>
+</tr>-->
+<tr>
+<td valign="top">Delivery Instruction</td><td valign="top">:</td><td valign="top">{{orderDetails.deliveryInstruction}}</td></tr><tr>
+
+</tr></tbody></table>
+            </div>
+
+
+
+        </div>
+
+            </div>
+
+        </div>
+
+
+
+        </div>
+
+    </div>
+
+    
+
+</section>

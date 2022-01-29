@@ -1,0 +1,371 @@
+<section class="admin-content" *ngIf="memberDetails">
+
+    <div class="bg-dark m-b-30">
+
+        <div class="container">
+
+            <div class="row p-b-60 p-t-60">
+
+
+
+                <div class="col-md-6 text-white p-b-30">
+
+                    <div class="media">
+
+                        <div class="media-body m-auto">
+
+                            <h5 class="mt-0">{{memberDetails.firstName + " " + memberDetails.lastName}}</h5>
+
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+                <div class="col-md-6 text-white my-auto text-md-right p-b-30">
+
+
+
+                    <div class="">
+
+                        <!-- <a href="mng_product_listing.php?mid=2" class="btn ml-2 mr-2 btn-primary"><i class="mdi mdi-account-arrow-left"></i> Shop For Member -->
+
+                        <!-- </a>&nbsp;   -->
+                        <a [routerLink]="'/mm/view-members'" routerLinkActive="router-link-active"
+                            class="btn ml-2 mr-2 btn-primary"><i class="mdi mdi-account-arrow-left"></i> Back </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="container pull-up">
+
+        <div class="row">
+
+            <div class="col-lg-8">
+
+                <!--message-->
+
+
+                <!--message-->
+
+                <!-- Single post-->
+
+                <div class="card m-b-30">
+
+                    <div class="card-header">
+
+                        <div class="media">
+
+                            <div class="media-body m-auto">
+
+                                <h5 class="m-0"> User Status: <span class='status {{memberDetails.status == 0 ? "inactive": "active"}}'>{{memberDetails.status == 0 ? "Inactive": "Active"}}</span></h5>
+
+                                <div class="opacity-75 text-muted"></div>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="card-controls">
+
+                            <a [routerLink]="['/mm/edit-member', memberId ]" routerLinkActive="router-link-active" class="">
+
+                                <i class="mdi  mdi-settings"></i>
+
+                            </a>
+
+                            <div class="dropdown">
+
+                                <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i
+                                        class="icon mdi  mdi-dots-vertical"></i> </a>
+
+                                <div class="dropdown-menu dropdown-menu-right">
+
+                                    <a class="dropdown-item" [routerLink]="['/mm/edit-member', memberId ]" routerLinkActive="router-link-active">Edit User </a>
+
+
+                                    <a class="dropdown-item cursor-pointer" (click)="changeUserStatus(0)" *ngIf="memberDetails.status == 1"
+                                        >Deactivate
+                                        User</a>
+                                    <a class="dropdown-item cursor-pointer" (click)="changeUserStatus(1)" *ngIf="memberDetails.status == 0"
+                                        >Activate
+                                        User</a>
+
+
+                                    <a class="dropdown-item cursor-pointer" (click)="deleteUser()"
+                                        >Delete User </a>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+
+
+                </div>
+
+
+
+
+
+
+
+
+
+            </div>
+
+
+
+            <div class="col-lg-4">
+
+
+
+                <div class="card m-b-30">
+
+                    <div class="card-header">
+
+                        <div class="avatar mr-2 avatar-xs">
+
+                            <div class="avatar-title bg-dark rounded-circle">
+
+                                <i class="mdi mdi-information-variant mdi-18px"></i>
+
+                            </div>
+
+                        </div>
+
+                        User Information
+
+                    </div>
+
+                    <div class="list-group list  list-group-flush">
+
+
+
+                        <div class="list-group-item ">
+
+                            <i class="mdi mdi-account"></i> Name: {{memberDetails.firstName + " " + memberDetails.lastName}}
+                        </div>
+
+                        <div class="list-group-item ">
+
+                            <i class="mdi mdi-email"></i> Email: <a
+                                href="mailto:{{memberDetails.email}}">{{memberDetails.email}}</a>
+
+                        </div>
+
+                        <div class="list-group-item ">
+
+                            <i class="mdi mdi-home-map-marker"></i> {{memberDetails.residentAddress}}
+                        </div>
+
+
+
+                        <div class="list-group-item ">
+
+                            <i class="mdi mdi mdi-city"></i> City: {{memberDetails.city?.name}}
+                        </div>
+
+
+
+
+
+
+
+                        <div class="list-group-item ">
+
+                            <i class="mdi mdi-cellphone-basic"></i> Phone: {{memberDetails.mobile}}
+                        </div>
+
+
+
+
+                    </div>
+
+                </div>
+
+
+
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+
+        <div class="col-lg-12">
+            <div class="card m-b-30">
+
+                <div class="card-raw">
+
+                    <div class="card-body">
+
+                        <h5 class="m-0">Orders</h5>
+
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="table-responsive">
+
+                            <div id="ptable_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-6">
+                                        <div class="dataTables_length" id="ptable_length"><label>Show <select
+                                                    name="ptable_length" aria-controls="ptable"
+                                                    class="custom-select custom-select-sm form-control form-control-sm">
+                                                    <option value="10">10</option>
+                                                    <option value="25">25</option>
+                                                    <option value="50">50</option>
+                                                    <option value="100">100</option>
+                                                </select> entries</label></div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6">
+                                        <div id="ptable_filter" class="dataTables_filter"><label>Search:<input
+                                                    type="search" class="form-control form-control-sm" placeholder=""
+                                                    aria-controls="ptable"></label></div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <table id="ptable" class="table dataTable no-footer" role="grid"
+                                            aria-describedby="ptable_info">
+
+                                            <thead>
+
+                                                <tr role="row">
+                                                    <th class="sorting_asc" tabindex="0" aria-controls="ptable"
+                                                        rowspan="1" colspan="1" aria-sort="ascending"
+                                                        aria-label="Order Date: activate to sort column descending"
+                                                        style="width: 100.008px;">Order Date</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="ptable" rowspan="1"
+                                                        colspan="1"
+                                                        aria-label="Image: activate to sort column ascending"
+                                                        style="width: 102.797px;">Image</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="ptable" rowspan="1"
+                                                        colspan="1"
+                                                        aria-label="Products: activate to sort column ascending"
+                                                        style="width: 174.609px;">Products</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="ptable" rowspan="1"
+                                                        colspan="1"
+                                                        aria-label="Color: activate to sort column ascending"
+                                                        style="width: 56.7188px;">Color</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="ptable" rowspan="1"
+                                                        colspan="1" aria-label="Size: activate to sort column ascending"
+                                                        style="width: 38.4141px;">Size</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="ptable" rowspan="1"
+                                                        colspan="1" aria-label="Qty: activate to sort column ascending"
+                                                        style="width: 36.4453px;">Qty</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="ptable" rowspan="1"
+                                                        colspan="1"
+                                                        aria-label="Price: activate to sort column ascending"
+                                                        style="width: 54.1406px;">Price</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="ptable" rowspan="1"
+                                                        colspan="1"
+                                                        aria-label="Order Status: activate to sort column ascending"
+                                                        style="width: 116.883px;">Order Status</th>
+                                                </tr>
+
+                                            </thead>
+
+                                            <tbody>
+
+
+
+
+                                                <tr role="row" class="odd" *ngFor="let order of memberDetails.orders">
+
+                                                    <td class="sorting_1">Feb 08, 2021</td>
+                                                    <td><a target="_blank" href="../product_details.php?id=9"><img
+                                                                src="../product_images/1108934261_image47658.jpg"
+                                                                width="100"></a></td>
+                                                    <td><a target="_blank" href="../product_details.php?id=9">Desks
+                                                            Madera Chestnut 71</a></td>
+                                                    <td>Black</td>
+                                                    <td>Small</td>
+                                                    <td>2ps</td>
+                                                    <td>$1,498.00</td>
+
+                                                    <td>Placed on Feb 08</td>
+
+                                                </tr>
+                                            </tbody>
+
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-5">
+                                        <div class="dataTables_info" id="ptable_info" role="status" aria-live="polite">
+                                            Showing 1 to 3 of 3 entries</div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-7">
+                                        <div class="dataTables_paginate paging_simple_numbers" id="ptable_paginate">
+                                            <ul class="pagination">
+                                                <li class="paginate_button page-item previous disabled"
+                                                    id="ptable_previous"><a href="#" aria-controls="ptable"
+                                                        data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li>
+                                                <li class="paginate_button page-item active"><a href="#"
+                                                        aria-controls="ptable" data-dt-idx="1" tabindex="0"
+                                                        class="page-link">1</a></li>
+                                                <li class="paginate_button page-item next disabled" id="ptable_next"><a
+                                                        href="#" aria-controls="ptable" data-dt-idx="2" tabindex="0"
+                                                        class="page-link">Next</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</section>

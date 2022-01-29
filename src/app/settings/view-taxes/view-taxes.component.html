@@ -1,0 +1,162 @@
+<section class="admin-content">
+    <div class="bg-dark">
+
+        <div class="container  m-b-30">
+
+            <div class="row">
+
+                <div class="col-12 text-white p-t-40 p-b-90">
+                    <h4 class="">Manage Taxes</h4>
+                    <p class="opacity-75 "></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container pull-up">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+
+                        <div class="media">
+
+                            <div class="media-body m-auto">
+
+                                <h5 class="m-0"> Manage Tax </h5>
+
+                                <div class="opacity-75 text-muted"></div>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="card-controls">
+
+                        </div>
+
+                    </div>
+                <div class="card-body ">
+                    <div class="row">
+                        <div class="col-md-6 offset-md-3">
+                            <form [formGroup]="updateTaxForm"
+                            #f="ngForm"
+                            autocomplete="off"
+                            (ngSubmit)="f.valid ? updateTax(f): ''">
+            
+                                    <div class="form-row m-b-20">
+            
+                                        <label for="username">Country</label>
+            
+            
+                                        <select class="form-control " required=""  [(ngModel)]="countryName"
+                                        [ngClass]="{'is-invalid': updateTaxForm.controls['country'].status == 'INVALID' && updateTaxForm.controls['country'].touched}"
+                                        (ngModelChange)="getStateListByCountry(countryName)" formControlName="country"
+                                            id="country-dropdown" placeholder="select Country">
+                                            <option value="" selected disabled>Select Country</option>
+                                            <option *ngFor="let country of countryList" [value]="country.name">{{country?.name}}</option>
+                                        </select>
+            
+                                    </div>
+            
+            
+                                    <div class="form-row m-b-20">
+            
+                                        <label for="username">State</label>
+            
+                                        <select required="" class="form-control " formControlName="state"
+                                        [ngClass]="{'is-invalid': updateTaxForm.controls['state'].status == 'INVALID' && updateTaxForm.controls['state'].touched}"
+                                         [(ngModel)]="stateName" id="state-dropdown" placeholder="select State">
+                                            <option  value="" selected disabled>Select State/Province</option>
+                                            <option *ngFor="let state of stateList" [value]="state.name">{{state?.name}}</option>
+            
+                                        </select>
+            
+                                    </div>
+                                <div class="form-row m-b-20" >
+                                            <label for="mobile">Tax(%)</label>
+                                            <input type="text" class="form-control"
+                                            [ngClass]="{'is-invalid': updateTaxForm.controls['tax'].status == 'INVALID' && updateTaxForm.controls['tax'].touched}"
+                                            id="phone" formControlName="tax"
+                                                placeholder="Tax">
+            
+                                    
+                                </div>
+                                
+                                <div class="text-center">
+                                    <button type="submit" [disabled]="f.invalid" class="btn btn-primary">{{taxId? "Update": "Create"}}</button>
+            
+                                </div>
+            
+                                
+                            </form>
+                        </div>
+                    </div>
+
+                    
+
+                </div>
+</div>
+            </div>
+            <div class="col-12 m-t-20">
+                <div class="card">
+                    <div class="card-header">
+
+                        <div class="media">
+
+                            <div class="media-body m-auto">
+
+                                <h5 class="m-0"> Tax List </h5>
+
+                                <div class="opacity-75 text-muted"></div>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="card-controls">
+
+                        </div>
+
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive p-t-10">
+                            <table id="member" class="table   " style="width:100%">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Country</th>
+                                    
+                                    <th>State</th>
+                                    <th>Tax(%)</th>
+                                    <th>Action</th>
+                                    
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr *ngFor="let tax of allTaxesList; let i=index">
+                                    <td>{{i+1}}</td>
+                                    <td> {{tax.country?.name}} </td>
+                                    
+                                    <td>{{tax.state?.name}}</td>
+                                    
+                                    <td>{{tax.tax}}</td>
+                                    <td>
+                                        <a style="font-size:18px;padding: 5px; cursor: pointer;" (click)="setEditForm(tax)" ><i class="mdi mdi-square-edit-outline" title="Edit" alt="Edit"></i></a>
+                                        <a style="font-size:18px; cursor: pointer;" 
+                                        (click)="deleteById(tax.id)"
+                                       ><i class="mdi mdi-delete-circle-outline" title="delete" alt="delete"></i></a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

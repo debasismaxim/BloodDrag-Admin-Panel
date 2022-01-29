@@ -1,0 +1,292 @@
+<section class="admin-content">
+
+    <div class="bg-dark m-b-30" *ngIf="badgeDetails">
+
+        <div class="container">
+
+            <div class="row p-b-60 p-t-60">
+
+
+
+                <div class="col-md-6 text-white p-b-30">
+
+                    <div class="media">
+
+
+
+                        <h5 class="mt-0">{{badgeDetails.title}}</h5>
+
+
+
+                        <div class="media-body m-auto">
+
+
+
+
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-6 text-white my-auto text-md-right p-b-30">
+                    <div class="">
+
+                        <a [routerLink]="['/bm/view-badges' ]" routerLinkActive="router-link-active"
+                            class="btn ml-2 mr-2 btn-primary"><i class="mdi mdi-account-arrow-left"></i> Back
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="container pull-up">
+
+        <div class="row">
+
+            <div class="col-lg-8">
+
+                <!--message-->
+
+
+                <!--message-->
+
+
+
+
+
+                <!-- Single post-->
+
+                <div class="card m-b-30">
+
+                    <div class="card-header">
+
+                        <div class="media">
+
+                            <div class="media-body m-auto">
+
+                                <h5 class="m-0"> Update Badge </h5>
+
+                                <div class="opacity-75 text-muted"></div>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="card-controls">
+
+                        </div>
+
+                    </div>
+
+                    <div class="card-raw">
+
+                        <div class="card-body">
+
+
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-12">
+
+                        <div class="card-body ">
+
+                            <form [formGroup]="updateBadgeForm"
+                        #f="ngForm"
+                        autocomplete="off"
+                        (ngSubmit)="f.valid ? updateBadge(f): ''">
+
+                            <div class="form-row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Title</label>
+                                        <input type="text" formControlName="title" 
+                                        [ngClass]="{'is-invalid': updateBadgeForm.controls['title'].status == 'INVALID' && updateBadgeForm.controls['title'].touched}"
+                                        class="form-control" placeholder="Badge Title">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Is Sponsored?</label>
+                                        <!-- <input type="radio" style="margin-left: 20px" id="html" name="isSponsored" formControlName="isSponsored" [value]="1">
+                                        <label for="html" class="radio-label">Yes</label>
+                                        <input type="radio" id="css" style="margin-left: 10px" name="isSponsored" formControlName="isSponsored" [value]="0">
+                                        <label for="css" class="radio-label">No</label> -->
+
+                                        <select class="form-control" 
+                                        [ngClass]="{'is-invalid': updateBadgeForm.controls['isSponsored'].status == 'INVALID' && updateBadgeForm.controls['isSponsored'].touched}"
+                                        formControlName="isSponsored" >
+                                            <option value="" selected disabled>Select </option>
+                                            <option [value]="1"  >Yes </option>
+                                            <option [value]="0" >No </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group col-md-6">
+                                    <label style="display: block;">Badge Logo</label>
+                                    <label class="avatar-input">
+                                        <span class="avatar avatar-xl">
+                                            <img [src]="updateBadgeForm.value.icon? badgeIconBaseUrl+updateBadgeForm.value.icon:'assets/img/badges/default.jpg'" alt="..."
+                                                 class="avatar-img">
+                                             <span class="avatar-input-icon">
+                                            <i class=" mdi mdi-progress-upload mdi-24px"></i>
+                                        </span>
+                                        </span>
+                                        <input type="file" class="avatar-file-picker" (change)="readBadgeFile($event)" >
+    
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-row"  *ngIf="updateBadgeForm.value.isSponsored">
+                                <div class="col-md-6">
+                                    <div class="form-group ">
+                                        <label for="mobile">Company Name</label>
+                                        <input type="text" class="form-control"
+                                        [ngClass]="{'is-invalid': updateBadgeForm.controls['companyName'].status == 'INVALID' && updateBadgeForm.controls['companyName'].touched}"
+                                        id="phone" formControlName="companyName"
+                                            placeholder="Sponsor Company Name" autocomplete="off">
+        
+                                    </div>
+                                    <div class="form-group ">
+                                        <label>External Link</label>
+                                        <input type="text" class="form-control" formControlName="extLink"
+                                        [ngClass]="{'is-invalid': updateBadgeForm.controls['extLink'].status == 'INVALID' && updateBadgeForm.controls['extLink'].touched}"
+                                        placeholder="External Link">
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group col-md-6">
+                                    <label style="display: block;">Company Logo</label>
+                                    <label class="avatar-input">
+                                        <span class="avatar avatar-xl">
+                                            <img [src]="updateBadgeForm.value.companyLogo? companyIconBaseUrl+updateBadgeForm.value.companyLogo:'assets/img/badges/default.jpg'" alt="..."
+                                                 class="avatar-img1">
+                                             <span class="avatar-input-icon">
+                                            <i class=" mdi mdi-progress-upload mdi-24px"></i>
+                                        </span>
+                                        </span>
+                                        <input type="file" class="avatar-file-picker" (change)="readCompanyLogo($event)" >
+    
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row" >
+                                <div class="form-group col-md-6">
+                                    <label>Expiry Date</label>
+                                    <input type="text" class="js-datepicker1 form-control" formControlName="expiryDate"
+                                        placeholder="Select Expiry Date" [(ngModel)]="expiryDate">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label>Badge Type</label>
+                                    <select class="form-control" 
+                                    [ngClass]="{'is-invalid': updateBadgeForm.controls['badgeType'].status == 'INVALID' && updateBadgeForm.controls['badgeType'].touched}"
+                                    formControlName="badgeType" >
+                                        <option value="" selected disabled>Select Badge Type</option>
+                                        <option [value]="type.key" *ngFor="let type of badgeTypes" >{{type.name}}</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-6" *ngIf="updateBadgeForm.value.badgeType == 1">
+                                    <label for="mobile">On Year Completion</label>
+                                    <input type="text" class="form-control"
+                                    [ngClass]="{'is-invalid': updateBadgeForm.controls['yearCompletion'].status == 'INVALID' && updateBadgeForm.controls['yearCompletion'].touched}"
+                                     formControlName="yearCompletion"
+                                        placeholder="Number of Year" autocomplete="off">
+    
+                                </div>
+                                <div class="form-group col-md-6" *ngIf="updateBadgeForm.value.badgeType == 2 || updateBadgeForm.value.badgeType == 3">
+                                    <label>Event Participation</label>
+                                    <select class="form-control" 
+                                    [ngClass]="{'is-invalid': updateBadgeForm.controls['eventParticipation'].status == 'INVALID' && updateBadgeForm.controls['eventParticipation'].touched}"
+                                    formControlName="eventParticipation" >
+                                        <option value="" selected disabled>Select Event</option>
+                                        <option [value]="event.id" *ngFor="let event of eventList" >{{event.name}}</option>
+                                    </select>
+                                </div>
+
+                            </div>
+                            
+
+                            <button type="submit" [disabled]="f.invalid" class="btn btn-primary">Update Badge</button>
+
+                        </form>
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+
+
+
+
+            </div>
+
+
+
+            <div class="col-lg-4">
+
+
+
+                <div class="card m-b-30">
+
+                    <div class="card-header">
+
+                        <div class="avatar mr-2 avatar-xs">
+
+                            <div class="avatar-title bg-dark rounded-circle">
+
+                                <i class="mdi mdi-information-variant mdi-18px"></i>
+
+                            </div>
+
+                        </div>
+
+                        Badge Details
+
+                    </div>
+
+                    <div class="list-group list  list-group-flush" *ngIf="badgeDetails">
+
+
+
+
+
+                        <div class="list-group-item ">
+
+                            <i class="mdi mdi-email"></i> Title: {{badgeDetails.title}}
+                        </div>
+
+                        <div class="list-group-item ">
+
+                            <i class="mdi mdi-home-map-marker"></i> Type: {{getBadgeType(badgeDetails.badgeType).name}}
+                        </div>
+                        <div class="list-group-item ">
+                            <i class="mdi mdi mdi-city"></i> Sponsored by: <a [href]="badgeDetails.extLink?badgeDetails.extLink:'#'" target="_blank">{{badgeDetails.companyName}}</a>
+                        </div>
+
+                        <div class="list-group-item ">
+                            <i class="mdi mdi mdi-city"></i> Expiry Date: {{badgeDetails.expiryDate }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</section>

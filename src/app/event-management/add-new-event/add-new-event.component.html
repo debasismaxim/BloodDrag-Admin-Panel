@@ -1,0 +1,180 @@
+<section class="admin-content">
+    <div class="bg-dark">
+
+        <div class="container  m-b-30">
+
+            <div class="row">
+
+                <div class="col-12 text-white p-t-40 p-b-90">
+
+
+
+                    <h4 class="">Add New Event</h4>
+
+                    <p class="opacity-75 "></p>
+
+
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    <div class="container  pull-up">
+        <div class="row">
+            <div class="col-lg-12">
+
+
+                <div class="card m-b-30">
+                    <div class="card-header">
+                        <h5 class="m-b-0">
+                            Add New Event
+                        </h5>
+                    </div>
+                    <div class="card-body ">
+                        <!--Following uses  .form-dark class on parent to make controls appear -->
+                        <!--transparent in the container-->
+                        <form [formGroup]="addEventForm" #f="ngForm" autocomplete="off"
+                            (ngSubmit)="createEvent(f)">
+                            <div class="form-row">
+                                <div class="form-group  col-md-12">
+                                    <label>Event Name</label>
+                                    <input type="text" formControlName="name" class="form-control"
+                                        placeholder="Event Name">
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="col-md-6 form-group">
+                                    <label>Start Date</label>
+                                    <input type="text" class="js-datepicker1 form-control" formControlName="startDate"
+                                        placeholder="Select Start Date" [(ngModel)]="startDate">
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label>End Date</label>
+                                    <input type="text" class="js-datepicker2 form-control" formControlName="endDate"
+                                        placeholder="Select End Date">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-6 form-group">
+                                    <div class="font-secondary"> Start Time </div>
+                                    <input class="form-control timepicker1" type="text" formControlName="startTime" placeholder="Select Start Time">
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <div class="font-secondary"> End Time </div>
+                                    <input class="form-control timepicker2" type="text" formControlName="endTime"  placeholder="Select End Time">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-6 form-group">
+                                <label for="username">Country</label>
+    
+    
+                                <select class="form-control " required=""  [(ngModel)]="countryName"
+                                [ngClass]="{'is-invalid': addEventForm.controls['country'].status == 'INVALID' && addEventForm.controls['country'].touched}"
+                                (ngModelChange)="getStateListByCountry(countryName)" formControlName="country"
+                                    id="country-dropdown" placeholder="select Country">
+                                    <option value="" selected disabled>Select Country</option>
+                                    <option *ngFor="let country of countryList" [value]="country.name">{{country?.name}}</option>
+                                </select>
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label for="username">State</label>
+    
+                                    <select required="" class="form-control " formControlName="state"
+                                    [ngClass]="{'is-invalid': addEventForm.controls['state'].status == 'INVALID' && addEventForm.controls['state'].touched}"
+                                     [(ngModel)]="stateName" id="state-dropdown" placeholder="select State">
+                                        <option  value="" selected disabled>Select State/Province</option>
+                                        <option *ngFor="let state of stateList" [value]="state.name">{{state?.name}}</option>
+        
+                                    </select>
+    
+                                </div>
+                            </div>
+    
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label>Location</label>
+                                    <input type="text" class="form-control" formControlName="location"
+                                        placeholder="1234 Main St">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>Postal Code</label>
+                                    <input type="text" class="form-control" formControlName="zip" placeholder="zipcode">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <label>Event Description</label>
+                                    <textarea formControlName="description" id="desc">
+                                    </textarea>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label style="display: block;">Event Images</label>
+                                    <label class="avatar-input" *ngFor="let pic of addEventForm.value.images; let i=index">
+                                        <i class="fa fa-times delete-icon" aria-hidden="true" (click)="removeImage(i)"></i>
+                                        <span class="avatar avatar-xxl">
+                                            <img [src]="eventImageBaseUrl + pic" alt="..." class="avatar-img">
+                                        </span>
+                                    
+
+                                    </label>
+                                    <div class="input-group mb-3">
+
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="inputGroupFileAddon01">Max 5Mb</span>
+                                        </div>
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" id="inputGroupFile01" (change)="readFile($event)" multiple>
+                                            <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label>No of Registered Cars allowed</label>
+                                    <input type="text" class="form-control" formControlName="registeredCarsAllowed"
+                                        placeholder="No. of Registered Cars">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>No of VIP registered cars allowed</label>
+                                    <input type="text" class="form-control" formControlName="vipRegisteredCarsAllowed"
+                                        placeholder="No. of VIP Registered Cars">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <label>Mapcode</label>
+                                    <input type="text" class="form-control" formControlName="mapCode"
+                                        placeholder="Mapcode">
+                                </div>
+                                <!-- <div class="col-md-12" *ngIf="addEventForm.value.mapCode">
+                                    <div [innerHtml]="addEventForm.value.mapCode">
+
+                                    </div>
+                                
+                                </div> -->
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Create Event</button>
+
+                        </form>
+                    </div>
+                </div>
+                <!--widget card ends-->
+
+
+            </div>
+        </div>
+
+
+    </div>
+</section>

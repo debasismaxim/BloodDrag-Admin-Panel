@@ -1,0 +1,37 @@
+footer{
+    background-color: #1A1A1A;
+    height: 58px;
+    font-size: 14px;
+}
+.copyRite{   
+    padding: 18px 10px 6px 0px;
+}
+.copyRite span{   
+    opacity: 0.5;
+}
+.copyRite a{
+    padding-left: 10px;
+}
+.right-content{
+    text-align: right;   
+    // padding: 18px 10px 0;
+}
+.top-menu-items{
+    display: inline-flex;
+    list-style: none;
+    padding-top: 18px;
+}
+.top-menu-items li a{
+    padding-right: 20px;
+    cursor: pointer;
+    color: #fff;
+    opacity: 0.5;
+}
+.top-menu-items li a:hover {
+    opacity: 1;
+    color: #a7031a;
+    text-decoration: none;
+}
+.top-menu-items li:last-child a {
+    padding-right: 0 !important;
+}

@@ -1,0 +1,86 @@
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { map } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class HomeService {
+
+  constructor(private http: HttpClient) { }
+
+  getAllSocialMediaList() {
+    return this.http.get<any>(`${environment.apiUrl}/homepages/getAllSocialMedia`).pipe(
+      map(response => {
+        return response;
+      })
+    );
+  }
+
+  updateSocialMedia(payLoad: any, socialMediaId:number) {
+    return this.http.post<any>(`${environment.apiUrl}/homepages/updateSocialMedia/${socialMediaId}`, payLoad).pipe(
+      map(response => {
+        return response;
+      })
+    );
+  }
+
+  createSocialMedia(payLoad: any) {
+    return this.http.post<any>(`${environment.apiUrl}/homepages/createSocialMedia`, payLoad).pipe(
+      map(response => {
+        return response;
+      })
+    );
+  }
+
+  delteSocialMedia(id: any) {
+    return this.http.get<any>(`${environment.apiUrl}/homepages/deleteSocialMedia/${id}`).pipe(
+      map(response => {
+        return response;
+      })
+    );
+  }
+
+  getAllHomeGridList() {
+    return this.http.get<any>(`${environment.apiUrl}/homepages/getAllHomeGrids`).pipe(
+      map(response => {
+        return response;
+      })
+    );
+  }
+
+  updateHomeGrid(payLoad: any, socialMediaId:number) {
+    return this.http.post<any>(`${environment.apiUrl}/homepages/updateHomeGrid/${socialMediaId}`, payLoad).pipe(
+      map(response => {
+        return response;
+      })
+    );
+  }
+
+  createHomeGrid(payLoad: any) {
+    return this.http.post<any>(`${environment.apiUrl}/homepages/createHomeGrid`, payLoad).pipe(
+      map(response => {
+        return response;
+      })
+    );
+  }
+
+  delteHomeGrid(id: any) {
+    return this.http.get<any>(`${environment.apiUrl}/homepages/deleteHomeGrid/${id}`).pipe(
+      map(response => {
+        return response;
+      })
+    );
+  }
+
+  uploadSocialIcon(file: any) {
+    var formData = new FormData();
+    formData.append("file", file);
+    return this.http.post<any>(`${environment.apiUrl}/media?process=HOME_ASSETS`, formData).pipe(
+      map(response => {
+        return response;
+      })
+    );
+  }
+}
