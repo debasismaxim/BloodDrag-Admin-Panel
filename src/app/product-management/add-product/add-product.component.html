@@ -127,7 +127,14 @@
                                       </mat-form-field>
                                 </div>
                             </div>
-
+                            <div class="form-row form-group">
+                                <div class="form-group  col-md-12">
+                                    <div class="tag-input"  style="margin-right: 10px;">
+                                        <input class="cat" name="featuredProduct" id="featuredProductId" [checked]="featuredProduct" (change)="featuredProduct= !featuredProduct" type="checkbox">
+                                        <label for="featuredProductId">{{'Featured'}}</label>
+                                    </div>
+                                </div>  
+                            </div>
                             <button type="submit" class="btn btn-primary">Add Product</button>
 
                         </form>

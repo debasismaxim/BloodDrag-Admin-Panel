@@ -23,6 +23,7 @@ export class AddProductComponent implements OnInit {
   categoryListBackup = []
   typeList:any = []
   typeListBackup:any = []
+  featuredProduct = false;
   productTags: any = []
   addOnBlur = true;
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
@@ -41,7 +42,8 @@ export class AddProductComponent implements OnInit {
       types: [''],
       description: ['', Validators.required],
       images: ['', Validators.required],
-      tags: ['']
+      tags: [''],
+      featured :[this.featuredProduct] 
     });
   }
 
@@ -105,6 +107,8 @@ export class AddProductComponent implements OnInit {
     if(!payLoad.category.length || !payLoad.types.length ) {
       return;
     }
+    payLoad.featured = this.featuredProduct;
+
     this.pmSrvc.createProductgroup(payLoad).subscribe(res => {
       if(!res.error) {
         $(window).scrollTop(0)

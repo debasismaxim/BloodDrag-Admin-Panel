@@ -6,6 +6,8 @@ import { CouponsComponent } from './coupons/coupons.component';
 import { EditMailContentComponent } from './edit-mail-content/edit-mail-content.component';
 import { MailContentComponent } from './mail-content/mail-content.component';
 import { ViewTaxesComponent } from './view-taxes/view-taxes.component';
+import { HideShowComponent } from './hide-show/hide-show.component';
+
 
 const routes: Routes = [
   {
@@ -32,6 +34,11 @@ const routes: Routes = [
     path: 'change-password',
     canActivate: [AuthGuard],
     component: ChangePasswordComponent,
+  },
+  {
+    path: 'manage-hide-show',
+    canActivate: [AuthGuard],
+    component: HideShowComponent,
   }
 ];
 

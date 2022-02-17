@@ -10,6 +10,7 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
 import { CouponsComponent } from './coupons/coupons.component';
 import { MatRadioModule } from '@angular/material/radio';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { HideShowComponent } from './hide-show/hide-show.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     EditMailContentComponent,
     ViewTaxesComponent,
     ChangePasswordComponent,
-    CouponsComponent
+    CouponsComponent,
+    HideShowComponent
   ],
   imports: [
     CommonModule,

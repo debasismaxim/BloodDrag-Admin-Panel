@@ -147,9 +147,23 @@ export class SettingsService {
       })
     );
   }
+  updateHideShowSettings(data: any): Observable<any> {
+    return this.http.post<any>(`${environment.apiUrl}/configurations/updateHideShowSettings`, data).pipe(
+      map(response => {
+        return response;
+      })
+    );
+  }
 
   deleteCouponById(id: number): Observable<any> {
     return this.http.get<any>(`${environment.apiUrl}/coupons/delete/${id}`).pipe(
+      map(response => {
+        return response;
+      })
+    );
+  }
+  getHideShowSettings(): Observable<any> {
+    return this.http.get<any>(`${environment.apiUrl}/configurations/hideShowSettings`).pipe(
       map(response => {
         return response;
       })
