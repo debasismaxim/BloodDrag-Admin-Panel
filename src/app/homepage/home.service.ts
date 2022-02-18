@@ -50,6 +50,22 @@ export class HomeService {
     );
   }
 
+  getHomeBanner() {
+    return this.http.get<any>(`${environment.apiUrl}/configurations/getBanner`).pipe(
+      map(response => {
+        return response;
+      })
+    );
+  }
+
+  saveHomeBanner(payLoad: any) {
+    return this.http.post<any>(`${environment.apiUrl}/configurations/saveBanner`, payLoad).pipe(
+      map(response => {
+        return response;
+      })
+    );
+  }
+
   updateHomeGrid(payLoad: any, socialMediaId:number) {
     return this.http.post<any>(`${environment.apiUrl}/homepages/updateHomeGrid/${socialMediaId}`, payLoad).pipe(
       map(response => {

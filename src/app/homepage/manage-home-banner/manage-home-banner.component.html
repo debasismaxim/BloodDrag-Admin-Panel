@@ -1,0 +1,124 @@
+<section class="admin-content">
+  <div class="bg-dark">
+
+    <div class="container  m-b-30">
+
+      <div class="row">
+
+        <div class="col-12 text-white p-t-40 p-b-90">
+          <h4 class="">Manage Home Banner</h4>
+          <p class="opacity-75 "></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container pull-up">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+
+            <div class="media">
+
+              <div class="media-body m-auto">
+
+                <h5 class="m-0"> Manage Home Banner </h5>
+
+                <div class="opacity-75 text-muted"></div>
+
+              </div>
+
+            </div>
+
+
+
+            <div class="card-controls">
+
+            </div>
+
+          </div>
+          <div class="card-body ">
+            <div class="row">
+              <div class="col-md-6 offset-md-3">
+                <form [formGroup]="updateHomeGridForm" #f="ngForm" autocomplete="off"
+                  (ngSubmit)="f.valid ? updateHomeBanner(f): ''">
+                  <div class="form-row m-b-20">
+                    <div class="form-group col-md-12">
+                      <label style="display: block;">Image</label>
+                      <label class="avatar-input">
+                        <span class="avatar avatar-xl">
+                          <img
+                            [src]="updateHomeGridForm.value.image? homeGridIconBaseUrl+updateHomeGridForm.value.image:'assets/img/badges/default.jpg'"
+                            alt="..." class="avatar-img">
+                          <span class="avatar-input-icon">
+                            <i class=" mdi mdi-progress-upload mdi-24px"></i>
+                          </span>
+                        </span>
+                        <input type="file" class="avatar-file-picker" (change)="readFile($event)">
+
+                      </label>
+                    </div>
+                  </div>
+                  <div class="form-row m-b-20">
+                    <div class="form-group col-md-12">
+                      <label for="mobile">Header</label>
+                      <input type="text" class="form-control"
+                        [ngClass]="{'is-invalid': updateHomeGridForm.controls['header'].status == 'INVALID' && updateHomeGridForm.controls['header'].touched}"
+                        id="phone" formControlName="header" placeholder="Enter Header">
+                    </div>
+
+
+                  </div>
+                  <div class="form-row m-b-20">
+                    <div class="form-group col-md-12">
+                      <label for="mobile">Description</label>
+                      <textarea class="form-control"
+                        [ngClass]="{'is-invalid': updateHomeGridForm.controls['description'].status == 'INVALID' && updateHomeGridForm.controls['description'].touched}"
+                        id="phone" formControlName="description" placeholder="Enter Description">
+
+                                        </textarea>
+                    </div>
+
+
+                  </div>
+
+                  <div class="form-row m-b-20">
+                    <div class="form-group col-md-12">
+                      <label for="mobile">Play Store URL</label>
+                      <input class="form-control"
+                        [ngClass]="{'is-invalid': updateHomeGridForm.controls['playStore'].status == 'INVALID' && updateHomeGridForm.controls['playStore'].touched}"
+                        id="phone" formControlName="playStore" placeholder="Enter Play Store Url" />
+                    </div>
+
+
+                  </div>
+
+                  <div class="form-row m-b-20">
+                    <div class="form-group col-md-12">
+                      <label for="mobile">App Store URL</label>
+                      <input class="form-control"
+                        [ngClass]="{'is-invalid': updateHomeGridForm.controls['appStore'].status == 'INVALID' && updateHomeGridForm.controls['appStore'].touched}"
+                        id="phone" formControlName="appStore" placeholder="Enter App Store Url" />
+                    </div>
+
+
+                  </div>
+
+                  <div class="text-center">
+                    <button type="submit" [disabled]="f.invalid" class="btn btn-primary">Save</button>
+
+                  </div>
+
+
+                </form>
+              </div>
+            </div>
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
