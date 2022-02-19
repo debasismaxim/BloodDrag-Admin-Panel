@@ -6,13 +6,15 @@ import { ManageSocialMediaComponent } from './manage-social-media/manage-social-
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ManageHomeGridComponent } from './manage-home-grid/manage-home-grid.component';
 import { ManageHomeBannerComponent } from './manage-home-banner/manage-home-banner.component';
+import { ManageHomeSeoComponent } from './manage-home-seo/manage-home-seo.component';
 
 
 @NgModule({
   declarations: [
     ManageSocialMediaComponent,
     ManageHomeGridComponent,
-    ManageHomeBannerComponent
+    ManageHomeBannerComponent,
+    ManageHomeSeoComponent
   ],
   imports: [
     CommonModule,

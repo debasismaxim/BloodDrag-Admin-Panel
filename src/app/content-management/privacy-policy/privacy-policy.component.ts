@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { HomeService } from 'src/app/homepage/home.service';
 import { AlertService } from 'src/app/_common/services/alert.service';
 import { environment } from 'src/environments/environment';
 import { CmService } from '../cm.service';
@@ -16,13 +17,16 @@ export class PrivacyPolicyComponent implements OnInit {
 
   privacyPolicyForm: FormGroup;
   contentDetails: any
-  
-  constructor(private router: Router, private activeRoute: ActivatedRoute, private cmSrvc:CmService, private fb:FormBuilder, private alertSrvc: AlertService ) { }
+  type = 'privacy'; 
+  constructor(private homeSrvc: HomeService,private router: Router, private activeRoute: ActivatedRoute, private cmSrvc:CmService, private fb:FormBuilder, private alertSrvc: AlertService ) { }
 
   ngOnInit(): void {
     this.getContentDetails()
     this.privacyPolicyForm = this.fb.group({
-      privacyPolicy: ['', Validators.required]
+      privacyPolicy: ['', Validators.required],
+      title: ['', Validators.required],
+      description: ['', Validators.required],
+      keywords: ['', Validators.required],
     });
   }
 
@@ -30,6 +34,9 @@ export class PrivacyPolicyComponent implements OnInit {
   setEditForm() {
     this.privacyPolicyForm.patchValue({
       privacyPolicy: this.contentDetails.privacyPolicy,
+      title: this.contentDetails.title,
+      description:this.contentDetails.description,
+      keywords: this.contentDetails.keywords
     });
     setTimeout(() => {
       tinymce.get(0).setContent(this.privacyPolicyForm.value.privacyPolicy)
@@ -40,7 +47,13 @@ export class PrivacyPolicyComponent implements OnInit {
     this.cmSrvc.getContentData().subscribe(res => {
       if(!res.error) {
         this.contentDetails = res.data;
-        this.setEditForm()
+        this.homeSrvc.getSEOData(this.type).subscribe(res => {
+          if(!res.error) {
+            this.contentDetails = {...this.contentDetails,...res.data};
+            this.setEditForm();
+          }
+          
+        })
       }
       
     })
@@ -49,14 +62,18 @@ export class PrivacyPolicyComponent implements OnInit {
   
 
   updateDetails(f: any) {
+    const updateSeo = this.privacyPolicyForm.value;
+    updateSeo['type'] = this.type;
     this.cmSrvc.updateContentDetails(this.privacyPolicyForm.value).subscribe(res => {
       if(!res.error) {
-        // f.resetForm();
-        $(window).scrollTop(0)
-        this.alertSrvc.success("Privacy Policy updated successfully.")
-        this.contentDetails()
+        this.homeSrvc.saveSEOData(updateSeo).subscribe(res => {
+          if(!res.error) {
+            $(window).scrollTop(0)
+            this.alertSrvc.success("Privacy Policy updated successfully.")
+            this.getContentDetails()
+          }
+        })
       }
-      
     })
   }
 

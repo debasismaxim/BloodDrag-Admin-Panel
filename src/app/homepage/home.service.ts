@@ -66,6 +66,23 @@ export class HomeService {
     );
   }
 
+
+  getSEOData(type:any) {
+    return this.http.get<any>(`${environment.apiUrl}/configurations/getSEO/${type}`).pipe(
+      map(response => {
+        return response;
+      })
+    );
+  }
+
+  saveSEOData(payLoad: any) {
+    return this.http.post<any>(`${environment.apiUrl}/configurations/saveSEO`, payLoad).pipe(
+      map(response => {
+        return response;
+      })
+    );
+  }
+
   updateHomeGrid(payLoad: any, socialMediaId:number) {
     return this.http.post<any>(`${environment.apiUrl}/homepages/updateHomeGrid/${socialMediaId}`, payLoad).pipe(
       map(response => {

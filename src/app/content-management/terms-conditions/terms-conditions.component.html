@@ -90,6 +90,49 @@
                                 </div>
                             </div>
 
+                            <div class="row">
+                                <div class="col-12">
+                                    <h1>Manage SEO - Meta Tags</h1>
+                                </div>
+                                <div class="col-md-6">
+                              
+                                    <div class="form-row m-b-20">
+                                      <div class="form-group col-md-12">
+                                        <label for="mobile">Title</label>
+                                        <input type="text" class="form-control"
+                                          [ngClass]="{'is-invalid': termsConditionsForm.controls['title'].status == 'INVALID' && termsConditionsForm.controls['title'].touched}"
+                                          id="phone" formControlName="title" placeholder="Enter Title">
+                                      </div>
+                  
+                  
+                                    </div>
+                                    <div class="form-row m-b-20">
+                                      <div class="form-group col-md-12">
+                                        <label for="mobile">Description</label>
+                                        <textarea class="form-control"
+                                          [ngClass]="{'is-invalid': termsConditionsForm.controls['description'].status == 'INVALID' && termsConditionsForm.controls['description'].touched}"
+                                          id="phone" formControlName="description" placeholder="Enter Description">
+                  
+                                                          </textarea>
+                                      </div>
+                  
+                  
+                                    </div>
+                  
+                                    <div class="form-row m-b-20">
+                                      <div class="form-group col-md-12">
+                                        <label for="mobile">Keywords</label>
+                                        <input class="form-control"
+                                          [ngClass]="{'is-invalid': termsConditionsForm.controls['keywords'].status == 'INVALID' && termsConditionsForm.controls['keywords'].touched}"
+                                          id="keywords" formControlName="keywords" placeholder="Enter Keywords" />
+                                      </div>
+                  
+                  
+                                    </div>
+
+                                </div>
+                              </div>
+                  
                             <button type="submit" class="btn btn-primary">Update</button>
 
                         </form>

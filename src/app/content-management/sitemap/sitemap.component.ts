@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { HomeService } from 'src/app/homepage/home.service';
 import { AlertService } from 'src/app/_common/services/alert.service';
 import { environment } from 'src/environments/environment';
 import { CmService } from '../cm.service';
@@ -16,13 +17,17 @@ export class SitemapComponent implements OnInit {
 
   sitemapForm: FormGroup;
   contentDetails: any
+  type="sitemap";
   
-  constructor(private router: Router, private activeRoute: ActivatedRoute, private cmSrvc:CmService, private fb:FormBuilder, private alertSrvc: AlertService ) { }
+  constructor(public homeSrvc : HomeService,private router: Router, private activeRoute: ActivatedRoute, private cmSrvc:CmService, private fb:FormBuilder, private alertSrvc: AlertService ) { }
 
   ngOnInit(): void {
     this.getContentDetails()
     this.sitemapForm = this.fb.group({
-      sitemap: ['', Validators.required]
+      sitemap: ['', Validators.required],
+      title: ['', Validators.required],
+      description: ['', Validators.required],
+      keywords: ['', Validators.required],
     });
   }
 
@@ -30,6 +35,9 @@ export class SitemapComponent implements OnInit {
   setEditForm() {
     this.sitemapForm.patchValue({
       sitemap: this.contentDetails.sitemap,
+      title: this.contentDetails.title,
+      description:this.contentDetails.description,
+      keywords: this.contentDetails.keywords
     });
     setTimeout(() => {
       tinymce.get(0).setContent(this.sitemapForm.value.sitemap)
@@ -40,7 +48,13 @@ export class SitemapComponent implements OnInit {
     this.cmSrvc.getContentData().subscribe(res => {
       if(!res.error) {
         this.contentDetails = res.data;
-        this.setEditForm()
+        this.homeSrvc.getSEOData(this.type).subscribe(res => {
+          if(!res.error) {
+            this.contentDetails = {...this.contentDetails,...res.data};
+            this.setEditForm();
+          }
+          
+        })
       }
       
     })
@@ -49,14 +63,18 @@ export class SitemapComponent implements OnInit {
   
 
   updateDetails(f: any) {
+    const updateSeo = this.sitemapForm.value;
+    updateSeo['type'] = this.type;
     this.cmSrvc.updateContentDetails(this.sitemapForm.value).subscribe(res => {
       if(!res.error) {
-        // f.resetForm();
-        $(window).scrollTop(0)
-        this.alertSrvc.success("Sitemap updated successfully.")
-        this.contentDetails()
+        this.homeSrvc.saveSEOData(updateSeo).subscribe(res => {
+          if(!res.error) {
+            $(window).scrollTop(0)
+            this.alertSrvc.success("Sitemap updated successfully.")
+            this.getContentDetails()
+          }
+        })
       }
-      
     })
   }
 
