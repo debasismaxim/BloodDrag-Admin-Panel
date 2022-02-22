@@ -7,6 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ManageHomeGridComponent } from './manage-home-grid/manage-home-grid.component';
 import { ManageHomeBannerComponent } from './manage-home-banner/manage-home-banner.component';
 import { ManageHomeSeoComponent } from './manage-home-seo/manage-home-seo.component';
+import { ManageHomeSliderComponent } from './manage-home-slider/manage-home-slider.component';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { ManageHomeSeoComponent } from './manage-home-seo/manage-home-seo.compon
     ManageSocialMediaComponent,
     ManageHomeGridComponent,
     ManageHomeBannerComponent,
-    ManageHomeSeoComponent
+    ManageHomeSeoComponent,
+    ManageHomeSliderComponent
   ],
   imports: [
     CommonModule,

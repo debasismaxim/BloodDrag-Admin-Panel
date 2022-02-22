@@ -17,6 +17,38 @@ export class HomeService {
       })
     );
   }
+  getAllHomeSlideList() {
+    return this.http.get<any>(`${environment.apiUrl}/configurations/slide/listAdmin`).pipe(
+      map(response => {
+        return response;
+      })
+    );
+  }
+
+  createSlideContent(payLoad: any) {
+    return this.http.post<any>(`${environment.apiUrl}/configurations/slide/create`, payLoad).pipe(
+      map(response => {
+        return response;
+      })
+    );
+  }
+
+  updateSlideContent(payLoad: any, socialMediaId:number) {
+    return this.http.post<any>(`${environment.apiUrl}/configurations/slide/update/${socialMediaId}`, payLoad).pipe(
+      map(response => {
+        return response;
+      })
+    );
+  }
+
+
+  deleteSlideContent(id: any) {
+    return this.http.get<any>(`${environment.apiUrl}/configurations/delete/${id}`).pipe(
+      map(response => {
+        return response;
+      })
+    );
+  }
 
   updateSocialMedia(payLoad: any, socialMediaId:number) {
     return this.http.post<any>(`${environment.apiUrl}/homepages/updateSocialMedia/${socialMediaId}`, payLoad).pipe(
