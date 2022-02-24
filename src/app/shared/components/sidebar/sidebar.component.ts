@@ -8,6 +8,7 @@ declare var $:any;
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit {
+  date = new Date();
 
   constructor(public router: Router) { }
 

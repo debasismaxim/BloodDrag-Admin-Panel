@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   apiUrl: "http://localhost:5000/api",
-  baseUrl: "http://localhost:5000",
+  baseUrl: "https://api.blooddrag.com",
   currentUrl: "http://localhost:4200/"
 };
 
