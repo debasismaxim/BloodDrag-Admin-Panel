@@ -7,6 +7,7 @@ import { EditMailContentComponent } from './edit-mail-content/edit-mail-content.
 import { MailContentComponent } from './mail-content/mail-content.component';
 import { ViewTaxesComponent } from './view-taxes/view-taxes.component';
 import { HideShowComponent } from './hide-show/hide-show.component';
+import { ManageStripeComponent } from './manage-stripe/manage-stripe.component';
 
 
 const routes: Routes = [
@@ -14,6 +15,11 @@ const routes: Routes = [
     path: 'view-mail-contents',
     canActivate: [AuthGuard],
     component: MailContentComponent,
+  },
+  {
+    path: 'manage-stripe',
+    canActivate: [AuthGuard],
+    component: ManageStripeComponent,
   },
   {
     path: 'edit-mail-content/:mailContentId',

@@ -14629,9 +14629,10 @@ a:hover
     display: flex;
 
     width: 100%;
-    height: 65px;
-    padding-right: 15px;
-    padding-left: 15px;
+    padding:20px;
+    /* height: 65px; */
+    /* padding-right: 15px; */
+    /* padding-left: 15px; */
 
     background-color: rgba(0, 0, 0, .15); 
 

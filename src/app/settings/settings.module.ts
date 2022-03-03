@@ -11,6 +11,7 @@ import { CouponsComponent } from './coupons/coupons.component';
 import { MatRadioModule } from '@angular/material/radio';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { HideShowComponent } from './hide-show/hide-show.component';
+import { ManageStripeComponent } from './manage-stripe/manage-stripe.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { HideShowComponent } from './hide-show/hide-show.component';
     ViewTaxesComponent,
     ChangePasswordComponent,
     CouponsComponent,
-    HideShowComponent
+    HideShowComponent,
+    ManageStripeComponent
   ],
   imports: [
     CommonModule,

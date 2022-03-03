@@ -1,7 +1,7 @@
 <aside class="admin-sidebar sidebar-show">
     <div class="admin-sidebar-brand">
         <!-- begin sidebar branding-->
-        <img class="admin-brand-logo" src="assets/img/logo.png" width="80" alt="atmos Logo">
+        <img class="admin-brand-logo" src="assets/img/logo.png" style="max-width: 200px;" alt="atmos Logo">
         <!-- end sidebar branding-->
         <div class="ml-auto">
             <!-- sidebar pin-->
@@ -580,6 +580,17 @@
                         <a [routerLink]="'/sm/manage-taxes'" [routerLinkActive]="['active']"  class="menu-link">
                             <span class="menu-label">
                                 <span class="menu-name">Manage Taxes
+                                </span>
+                            </span>
+                            <span class="menu-icon">
+                                <i class="icon-placeholder mdi mdi-checkbook "></i>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a [routerLink]="'/sm/manage-stripe'" [routerLinkActive]="['active']"  class="menu-link">
+                            <span class="menu-label">
+                                <span class="menu-name">Manage Stripe
                                 </span>
                             </span>
                             <span class="menu-icon">

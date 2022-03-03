@@ -43,6 +43,43 @@
                 <form [formGroup]="updateHomeGridForm" #f="ngForm" autocomplete="off"
                   (ngSubmit)="f.valid ? updateHomeBanner(f): ''">
                   <div class="form-row m-b-20">
+                    <div class="form-group col-md-6">
+                      <label class="example-margin d-block">Choose Option:</label>
+                      <mat-radio-group formControlName="option" name="option">
+                        <mat-radio-button class="example-margin p-1" [checked]="updateHomeGridForm.value.option === 1"
+                          [value]="1">Full Width</mat-radio-button>
+                        <mat-radio-button class="example-margin p-1 ml-3l"
+                          [checked]="updateHomeGridForm.value.option === 0" [value]="0"> Feature Image
+                        </mat-radio-button>
+                      </mat-radio-group>
+                    </div>
+                  </div>
+                  <div class="form-row m-b-20" *ngIf="updateHomeGridForm.value.option">
+                    <div class="form-group col-md-12">
+                      <label style="display: block;">Background Image</label>
+                      <label class="avatar-input">
+                        <span class="avatar avatar-xl">
+                          <img
+                            [src]="updateHomeGridForm.value.background_image ? homeGridIconBaseUrl+updateHomeGridForm.value.background_image:'assets/img/badges/default.jpg'"
+                            alt="..." class="avatar-img">
+                          <span class="avatar-input-icon">
+                            <i class=" mdi mdi-progress-upload mdi-24px"></i>
+                          </span>
+                        </span>
+                        <input type="file" class="avatar-file-picker" (change)="uploadBackgroundFile($event)">
+
+                      </label>
+                    </div>
+                  </div>
+                  <div class="form-row m-b-20" *ngIf="updateHomeGridForm.value.option">
+                    <div class="form-group col-md-12">
+                      <label style="display: block;">Background Link</label>
+                      <input type="text" class="form-control"
+                        [ngClass]="{'is-invalid': updateHomeGridForm.controls['background_link'].status == 'INVALID' && updateHomeGridForm.controls['background_link'].touched}"
+                        id="phone" formControlName="background_link" placeholder="Enter Link">
+                    </div>
+                  </div>
+                  <div class="form-row m-b-20" *ngIf="!updateHomeGridForm.value.option">
                     <div class="form-group col-md-12">
                       <label style="display: block;">Image</label>
                       <label class="avatar-input">
@@ -59,7 +96,8 @@
                       </label>
                     </div>
                   </div>
-                  <div class="form-row m-b-20">
+
+                  <div class="form-row m-b-20" *ngIf="!updateHomeGridForm.value.option">
                     <div class="form-group col-md-12">
                       <label for="mobile">Header</label>
                       <input type="text" class="form-control"
@@ -69,7 +107,7 @@
 
 
                   </div>
-                  <div class="form-row m-b-20">
+                  <div class="form-row m-b-20" *ngIf="!updateHomeGridForm.value.option">
                     <div class="form-group col-md-12">
                       <label for="mobile">Description</label>
                       <textarea class="form-control"
@@ -82,7 +120,7 @@
 
                   </div>
 
-                  <div class="form-row m-b-20">
+                  <div class="form-row m-b-20" *ngIf="!updateHomeGridForm.value.option">
                     <div class="form-group col-md-12">
                       <label for="mobile">Play Store URL</label>
                       <input class="form-control"
@@ -93,7 +131,7 @@
 
                   </div>
 
-                  <div class="form-row m-b-20">
+                  <div class="form-row m-b-20" *ngIf="!updateHomeGridForm.value.option">
                     <div class="form-group col-md-12">
                       <label for="mobile">App Store URL</label>
                       <input class="form-control"

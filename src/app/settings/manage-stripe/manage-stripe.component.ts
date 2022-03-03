@@ -2,18 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { first } from 'rxjs/operators';
+import { HomeService } from 'src/app/homepage/home.service';
 import { DeleteConfirmDialogComponent } from 'src/app/_common/components/delete-confirm-dialog/delete-confirm-dialog.component';
 import { AlertService } from 'src/app/_common/services/alert.service';
 import { environment } from 'src/environments/environment';
-import { HomeService } from '../home.service';
 declare var $: any;
 
 @Component({
-  selector: 'app-manage-home-banner',
-  templateUrl: './manage-home-banner.component.html',
-  styleUrls: ['./manage-home-banner.component.scss']
+  selector: 'app-manage-stripe',
+  templateUrl: './manage-stripe.component.html',
+  styleUrls: ['./manage-stripe.component.scss']
 })
-export class ManageHomeBannerComponent implements OnInit {
+export class ManageStripeComponent implements OnInit {
 
   allHomeGridList:any = []
   updateHomeGridForm:FormGroup
@@ -29,28 +29,16 @@ export class ManageHomeBannerComponent implements OnInit {
   ngOnInit() {
     this.getHomeBanner()
     this.updateHomeGridForm = this.fb.group({
-      header: [''],
-      description: ['', Validators.required],
-      image: [''],
-      appStore: [''],
-      playStore: [''],
-      option : [0],
-      background_link : [''],
-      background_image : ['']
+      secret: ['',Validators.required],
+      env : ['sandbox']
      });
   }
 
   setHomeGridForm() {
     console.log(this.homeGridDetails);
     this.updateHomeGridForm.patchValue({
-      header: this.homeGridDetails.header,
-      description: this.homeGridDetails.description,
-      image: this.homeGridDetails.image,
-      appStore: this.homeGridDetails.appStore,
-      playStore: this.homeGridDetails.playStore,
-      option : this.homeGridDetails.option ? this.homeGridDetails.option : 0,
-      background_link : this.homeGridDetails.background_link,
-      background_image : this.homeGridDetails.background_image
+      secret: this.homeGridDetails.keys ? this.homeGridDetails.keys['secret'] : '',
+      env : this.homeGridDetails.env ? this.homeGridDetails.env : 'sandbox'
     })
   }
 
@@ -61,7 +49,7 @@ export class ManageHomeBannerComponent implements OnInit {
   }
 
   getHomeBanner() {
-    this.homeSrvc.getHomeBanner().subscribe(res => {
+    this.homeSrvc.getStripe().subscribe(res => {
       if(!res.error) {
         this.allHomeGridList = res.data
         this.setEditForm(this.allHomeGridList);
@@ -73,7 +61,11 @@ export class ManageHomeBannerComponent implements OnInit {
   updateHomeBanner(f: any) {
     let payLoad = JSON.parse(JSON.stringify(this.updateHomeGridForm.value))
     console.log(payLoad);
-      this.homeSrvc.saveHomeBanner({record : payLoad}).subscribe(res => {
+    payLoad['keys'] ={
+      secret : payLoad['secret'],
+    } 
+    console.log(payLoad);
+      this.homeSrvc.saveStripe({record : payLoad}).subscribe(res => {
         if(!res.error) {
           $(window).scrollTop(0)
           f.resetForm();

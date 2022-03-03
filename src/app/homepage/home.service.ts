@@ -99,6 +99,23 @@ export class HomeService {
   }
 
 
+  getStripe() {
+    return this.http.get<any>(`${environment.apiUrl}/configurations/getStripe`).pipe(
+      map(response => {
+        return response;
+      })
+    );
+  }
+
+  saveStripe(payLoad: any) {
+    return this.http.post<any>(`${environment.apiUrl}/configurations/saveStripe`, payLoad).pipe(
+      map(response => {
+        return response;
+      })
+    );
+  }
+
+
   getSEOData(type:any) {
     return this.http.get<any>(`${environment.apiUrl}/configurations/getSEO/${type}`).pipe(
       map(response => {

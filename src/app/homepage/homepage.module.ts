@@ -8,6 +8,7 @@ import { ManageHomeGridComponent } from './manage-home-grid/manage-home-grid.com
 import { ManageHomeBannerComponent } from './manage-home-banner/manage-home-banner.component';
 import { ManageHomeSeoComponent } from './manage-home-seo/manage-home-seo.component';
 import { ManageHomeSliderComponent } from './manage-home-slider/manage-home-slider.component';
+import {MatRadioModule} from '@angular/material/radio';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { ManageHomeSliderComponent } from './manage-home-slider/manage-home-slid
     CommonModule,
     HomepageRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatRadioModule
   ]
 })
 export class HomepageModule { }
