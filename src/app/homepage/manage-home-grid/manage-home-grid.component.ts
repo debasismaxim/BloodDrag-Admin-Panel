@@ -31,7 +31,8 @@ export class ManageHomeGridComponent implements OnInit {
     this.updateHomeGridForm = this.fb.group({
       heading: ['', Validators.required],
       description: ['', Validators.required],
-      icon: ['']
+      icon: [''],
+      link: [''],
     });
   }
 
@@ -39,7 +40,8 @@ export class ManageHomeGridComponent implements OnInit {
     this.updateHomeGridForm.patchValue({
       heading: this.homeGridDetails.heading,
       description: this.homeGridDetails.description,
-      icon: this.homeGridDetails.icon
+      icon: this.homeGridDetails.icon,
+      link: this.homeGridDetails.link
     })
   }
 

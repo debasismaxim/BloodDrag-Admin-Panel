@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'BloodDrag-AdminPanel';
+  titleName = 'BloodDrag Official Website';
+  constructor(public title:Title){
+    this.title.setTitle(this.titleName);
+  }
 }
