@@ -30,6 +30,7 @@ export class ManageStripeComponent implements OnInit {
     this.getHomeBanner()
     this.updateHomeGridForm = this.fb.group({
       secret: ['',Validators.required],
+      public: ['',Validators.required],
       env : ['sandbox']
      });
   }
@@ -38,6 +39,8 @@ export class ManageStripeComponent implements OnInit {
     console.log(this.homeGridDetails);
     this.updateHomeGridForm.patchValue({
       secret: this.homeGridDetails.keys ? this.homeGridDetails.keys['secret'] : '',
+      public: this.homeGridDetails.keys ? this.homeGridDetails.keys['public'] : '',
+
       env : this.homeGridDetails.env ? this.homeGridDetails.env : 'sandbox'
     })
   }
@@ -63,6 +66,7 @@ export class ManageStripeComponent implements OnInit {
     console.log(payLoad);
     payLoad['keys'] ={
       secret : payLoad['secret'],
+      public : payLoad['public'],
     } 
     console.log(payLoad);
       this.homeSrvc.saveStripe({record : payLoad}).subscribe(res => {

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { first } from 'rxjs/operators';
+import { PmService } from 'src/app/product-management/pm.service';
 import { DeleteConfirmDialogComponent } from 'src/app/_common/components/delete-confirm-dialog/delete-confirm-dialog.component';
 import { AlertService } from 'src/app/_common/services/alert.service';
 import { environment } from 'src/environments/environment';
@@ -22,9 +23,10 @@ export class ManageHomeBannerComponent implements OnInit {
   firstLoad = true
 
   homeGridIconBaseUrl = environment.baseUrl + "/uploads/home_assets/"
+  productImageBaseUrl = environment.baseUrl + "/uploads/products/"
   
   constructor(private homeSrvc: HomeService, private alertSrvc: AlertService, 
-    private fb: FormBuilder, private dialog:MatDialog) { }
+    private fb: FormBuilder, private dialog:MatDialog, public pmSrvc : PmService) { }
 
   ngOnInit() {
     this.getHomeBanner()
@@ -50,7 +52,7 @@ export class ManageHomeBannerComponent implements OnInit {
       playStore: this.homeGridDetails.playStore,
       option : this.homeGridDetails.option ? this.homeGridDetails.option : 0,
       background_link : this.homeGridDetails.background_link,
-      background_image : this.homeGridDetails.background_image
+      background_image : this.homeGridDetails.background_image && typeof this.homeGridDetails.background_image ==='object' ? this.homeGridDetails.background_image : ''
     })
   }
 
@@ -102,20 +104,27 @@ export class ManageHomeBannerComponent implements OnInit {
   }
 
   uploadBackgroundFile(e:any) {
-    let input = e.target
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
-
-        reader.readAsDataURL(input.files[0]);
-        this.homeSrvc.uploadSocialIcon(input.files[0]).pipe(first()).subscribe(res => {
-
-          if(!res.error) {
-            this.updateHomeGridForm.patchValue({
-              'background_image': <string>res.data.filename
-            })
-          }
-        })
-    }
+      let input = e.target
+      let files = []
+      if (input.files && input.files[0]) {
+        for  (var i =  0; i <  e.target.files.length; i++)  {  
+          files.push(e.target.files[i]);
+        }
+          this.pmSrvc.uploadEventImages(files).pipe(first()).subscribe(res => {
+            if(!res.error) {
+              let fileNames: any[] = []
+              if(this.updateHomeGridForm.value.images && this.updateHomeGridForm.value.background_image.length ) {
+                fileNames = fileNames.concat(this.updateHomeGridForm.value.background_image)
+              }
+              res.data.forEach((file: any) => {
+                fileNames.push(file.filename)
+              });
+              this.updateHomeGridForm.patchValue({
+                'background_image': fileNames
+              })
+            }
+          })
+      }
   }
 
   initiateDataTable() {
@@ -153,5 +162,7 @@ export class ManageHomeBannerComponent implements OnInit {
     })
     
   }
-
+  removeImage(imageIndex:number) {
+    this.updateHomeGridForm.value.background_image.splice(imageIndex, 1)
+  }
 }

@@ -38,7 +38,31 @@
 
                     </div>
                 <div class="card-body ">
-                    <div class="row" *ngFor="let section of sections;let i =index">
+                    <div class="form-row m-b-20" *ngFor="let section of sections;let i =index">
+                        <div class="form-group col-md-12">
+                          <label style="display: block;font-weight: 500;">{{section['name'] | uppercase}}</label>
+                            <mat-slide-toggle
+                            class="example-margin"
+                            [checked] = "section['show']"
+                            [color] = "color"
+                            (change)="onToggleShow($event,i)"
+                            >
+                          Show
+                        </mat-slide-toggle>
+                        &nbsp;    
+                        &nbsp;    
+                        &nbsp;    
+                        <mat-slide-toggle
+                            class="example-margin"
+                            [checked] = "section['hide']"
+                            [color] = "color"
+                            (change)="onToggleHide($event,i)"
+                            >
+                          Hide
+                        </mat-slide-toggle>
+                      </div>
+                      </div>
+                    <!-- <div class="row" *ngFor="let section of sections;let i =index">
                         <label>{{section['name']}}</label>
                         <div class="col-2">
                             <mat-slide-toggle
@@ -64,7 +88,7 @@
 
                         </div>
                         
-                    </div>
+                    </div> -->
                     <div class="row">
                         <div class="col-6">
                                 <button type="button" (click)="updateSettings()"  class="btn btn-primary">Save</button>

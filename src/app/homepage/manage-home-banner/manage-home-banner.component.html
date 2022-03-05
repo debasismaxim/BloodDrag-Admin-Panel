@@ -55,21 +55,27 @@
                     </div>
                   </div>
                   <div class="form-row m-b-20" *ngIf="updateHomeGridForm.value.option">
-                    <div class="form-group col-md-12">
-                      <label style="display: block;">Background Image</label>
-                      <label class="avatar-input">
-                        <span class="avatar avatar-xl">
-                          <img
-                            [src]="updateHomeGridForm.value.background_image ? homeGridIconBaseUrl+updateHomeGridForm.value.background_image:'assets/img/badges/default.jpg'"
-                            alt="..." class="avatar-img">
-                          <span class="avatar-input-icon">
-                            <i class=" mdi mdi-progress-upload mdi-24px"></i>
-                          </span>
-                        </span>
-                        <input type="file" class="avatar-file-picker" (change)="uploadBackgroundFile($event)">
+                      <div class="form-group">
+                          <label style="display: block;">Product Images</label>
+                          <label class="avatar-input" *ngFor="let pic of updateHomeGridForm.value.background_image; let i=index">
+                              <i class="fa fa-times delete-icon" aria-hidden="true" (click)="removeImage(i)"></i>
+                              <span class="avatar avatar-xxl">
+                                  <img [src]="productImageBaseUrl + pic" alt="..." class="avatar-img">
+                              </span>
+                          
 
-                      </label>
-                    </div>
+                          </label>
+                          <div class="input-group mb-3">
+
+                              <div class="input-group-prepend">
+                                  <span class="input-group-text" id="inputGroupFileAddon01">Max 5Mb</span>
+                              </div>
+                              <div class="custom-file">
+                                  <input type="file" class="custom-file-input" id="inputGroupFile01" (change)="uploadBackgroundFile($event)" multiple>
+                                  <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                              </div>
+                          </div>
+                      </div>
                   </div>
                   <div class="form-row m-b-20" *ngIf="updateHomeGridForm.value.option">
                     <div class="form-group col-md-12">

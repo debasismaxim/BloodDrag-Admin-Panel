@@ -53,12 +53,22 @@
                       </mat-radio-group>
                     </div>
                   </div>
-                  <div class="form-row m-b-20" *ngIf="!updateHomeGridForm.value.option">
+                  <div class="form-row m-b-20">
                     <div class="form-group col-md-12">
-                      <label for="mobile">Secret</label>
+                      <label for="mobile">Secret Key</label>
                       <input type="text" class="form-control"
                         [ngClass]="{'is-invalid': updateHomeGridForm.controls['secret'].status == 'INVALID' && updateHomeGridForm.controls['secret'].touched}"
                         id="phone" formControlName="secret" placeholder="Enter Secret">
+                    </div>
+
+
+                  </div>
+                  <div class="form-row m-b-20">
+                    <div class="form-group col-md-12">
+                      <label for="mobile">Public Key</label>
+                      <input type="text" class="form-control"
+                        [ngClass]="{'is-invalid': updateHomeGridForm.controls['public'].status == 'INVALID' && updateHomeGridForm.controls['public'].touched}"
+                        id="phone" formControlName="public" placeholder="Enter public">
                     </div>
 
 
