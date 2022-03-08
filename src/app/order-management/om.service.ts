@@ -18,6 +18,14 @@ export class OmService {
     );
   }
 
+  getAllTicketPurchased() {
+    return this.http.get<any>(`${environment.apiUrl}/orders/getAllSoldTickets`).pipe(
+      map(response => {
+        return response;
+      })
+    );
+  }
+
   getOrderDetails(orderId: any) {
     return this.http.post<any>(`${environment.apiUrl}/marketPlaceCarts/getOrderDetails`, {orderId: parseInt(orderId)}).pipe(
       map(response => {

@@ -79,12 +79,21 @@
                   </div>
                   <div class="form-row m-b-20" *ngIf="updateHomeGridForm.value.option">
                     <div class="form-group col-md-12">
+                      <label style="display: block;">Transition(second)</label>
+                      <input type="text" class="form-control"
+                        [ngClass]="{'is-invalid': updateHomeGridForm.controls['transition'].status == 'INVALID' && updateHomeGridForm.controls['transition'].touched}"
+                        id="phone" formControlName="transition" placeholder="Enter Transition">
+                    </div>
+                  </div>
+                  <div class="form-row m-b-20" *ngIf="updateHomeGridForm.value.option">
+                    <div class="form-group col-md-12">
                       <label style="display: block;">Background Link</label>
                       <input type="text" class="form-control"
                         [ngClass]="{'is-invalid': updateHomeGridForm.controls['background_link'].status == 'INVALID' && updateHomeGridForm.controls['background_link'].touched}"
                         id="phone" formControlName="background_link" placeholder="Enter Link">
                     </div>
                   </div>
+                  
                   <div class="form-row m-b-20" *ngIf="!updateHomeGridForm.value.option">
                     <div class="form-group col-md-12">
                       <label style="display: block;">Image</label>

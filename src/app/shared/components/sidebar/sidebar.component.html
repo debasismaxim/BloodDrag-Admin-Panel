@@ -367,6 +367,20 @@
                         </a>
                     </li>
 
+
+                    <li class="menu-item">
+                        <a [routerLink]="'/om/view-tickets'" [routerLinkActive]="['active']"  class=" menu-link">
+                            <span class="menu-label">
+                                <span class="menu-name">View Tickets
+                                </span>
+                            </span>
+                            <span class="menu-icon">
+
+                                <i class="icon-placeholder mdi mdi-checkbook "></i>
+                            </span>
+                        </a>
+                    </li>
+
                 </ul>
             </li>
             <li class="menu-item " [ngClass]="{'active opened': router.url.includes('/homepage/')}">

@@ -3,12 +3,18 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../_common/guards/auth.guard';
 import { EditOrderComponent } from './edit-order/edit-order.component';
 import { ViewOrdersComponent } from './view-orders/view-orders.component';
+import { ViewTicketsComponent } from './view-tickets/view-tickets.component';
 
 const routes: Routes = [
   {
     path: 'view-orders',
     canActivate: [AuthGuard],
     component: ViewOrdersComponent,
+  },
+  {
+    path: 'view-tickets',
+    canActivate: [AuthGuard],
+    component: ViewTicketsComponent,
   },
   {
     path: 'edit-order/:orderId',

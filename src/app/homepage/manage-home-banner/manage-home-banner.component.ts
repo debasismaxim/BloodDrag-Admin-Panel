@@ -37,6 +37,7 @@ export class ManageHomeBannerComponent implements OnInit {
       appStore: [''],
       playStore: [''],
       option : [0],
+      transition : [''],
       background_link : [''],
       background_image : ['']
      });
@@ -51,6 +52,7 @@ export class ManageHomeBannerComponent implements OnInit {
       appStore: this.homeGridDetails.appStore,
       playStore: this.homeGridDetails.playStore,
       option : this.homeGridDetails.option ? this.homeGridDetails.option : 0,
+      transition : this.homeGridDetails.transition,
       background_link : this.homeGridDetails.background_link,
       background_image : this.homeGridDetails.background_image && typeof this.homeGridDetails.background_image ==='object' ? this.homeGridDetails.background_image : ''
     })
@@ -112,7 +114,7 @@ export class ManageHomeBannerComponent implements OnInit {
         }
           this.pmSrvc.uploadEventImages(files).pipe(first()).subscribe(res => {
             if(!res.error) {
-              let fileNames: any[] = []
+              let fileNames: any[] = this.updateHomeGridForm.value.background_image;
               if(this.updateHomeGridForm.value.images && this.updateHomeGridForm.value.background_image.length ) {
                 fileNames = fileNames.concat(this.updateHomeGridForm.value.background_image)
               }
