@@ -34,6 +34,7 @@
                             <table id="member" class="table   " style="width:100%">
                                 <thead>
                                 <tr>
+                                    <th></th>
                                     <th>SL NO#</th>
                                     <th>EVENT NAME</th>
                                     <th>TICKET TYPE</th>
@@ -44,6 +45,11 @@
                                 </thead>
                                 <tbody>
                                 <tr *ngFor="let order of allOrderList">
+                                    <td>
+                                            <span class="avatar avatar-l">
+                                                <img [src]="badgeImageBaseUrl + order['_id']+'.png'" alt="..." class="avatar-img">
+                                            </span>
+                                    </td>
                                     <td>{{order.orderId ? order.orderId : ''}}</td>
                                     <td> {{order.eventData ? order.eventData['name'] : ''}} </td>
                                     <td>{{order.ticketTypeId}}</td>

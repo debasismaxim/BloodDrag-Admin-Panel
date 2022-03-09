@@ -16,7 +16,7 @@ export class ViewTicketsComponent implements OnInit {
 
   allOrderList:any = []
   statusList = AppConstants.cartStatus
-  badgeImageBaseUrl = environment.baseUrl + "/uploads/products/"
+  badgeImageBaseUrl = environment.baseUrl + "/uploads/tickets/"
   
   constructor(private omSrvc: OmService, private alertSrvc: AlertService, private dialog:MatDialog) { }
 
