@@ -40,6 +40,7 @@ export class AddNewEventComponent implements OnInit {
       state: ['', Validators.required],
       location: ['', Validators.required],
       zip:  ['', Validators.required],
+      link:  [''],
       description: ['', Validators.required],
       images: [''],
       registeredCarsAllowed: ['', Validators.required],
