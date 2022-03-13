@@ -40,6 +40,7 @@
                                     <th>TICKET TYPE</th>
                                     <th>PRICE</th>
                                     <th>PURCHASED BY</th>
+                                    <th>STATUS</th>
                                     <th>ACTION</th>
                                 </tr>
                                 </thead>
@@ -55,9 +56,12 @@
                                     <td>{{order.ticketTypeId}}</td>
                                     <td>{{order.totalPrice | currency : 'USD'}}</td>
                                     <td>{{order['userData'] ? (order['userData']['firstName'] + ' ' +order['userData']['lastName']) : '' }}</td>
+                                    <td>{{order['status']}}</td>
                                     <td>
-                                        <!-- <a style="font-size:14px;padding: 5px;" [routerLink]="['/om/edit-order', order.orderId ]" routerLinkActive="router-link-active">
-                                            View/Edit</a> -->
+                                        <a style="font-size:14px;padding: 5px;">
+                                            View/Edit</a>
+                                            <a style="font-size:14px;padding: 5px;">
+                                                Delete</a>
                                     </td>
                                 </tr>
                                 </tbody>
