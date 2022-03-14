@@ -6,7 +6,11 @@ export const environment = {
   production: false,
   apiUrl: "http://localhost:5000/api",
   baseUrl: "https://api.blooddrag.com",
-  currentUrl: "http://localhost:4200/"
+  currentUrl: "http://localhost:4200/",
+  recaptcha : {
+    siteKey : "6LfmtNceAAAAALZKBCZxLhn817tGOwaKN_tazMUG",
+    secretKey : "6LfmtNceAAAAALfD5bMXl8ApsMmGxyLCfjm7mdNk"
+  }
 };
 
 /*
