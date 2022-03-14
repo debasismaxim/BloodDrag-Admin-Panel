@@ -39,7 +39,8 @@ export class ManageHomeBannerComponent implements OnInit {
       option : [0],
       transition : [''],
       background_link : [''],
-      background_image : ['']
+      background_image : [''],
+      feature_image : ['']
      });
   }
 
@@ -54,7 +55,8 @@ export class ManageHomeBannerComponent implements OnInit {
       option : this.homeGridDetails.option ? this.homeGridDetails.option : 0,
       transition : this.homeGridDetails.transition,
       background_link : this.homeGridDetails.background_link,
-      background_image : this.homeGridDetails.background_image && typeof this.homeGridDetails.background_image ==='object' ? this.homeGridDetails.background_image : ''
+      background_image : this.homeGridDetails.background_image && typeof this.homeGridDetails.background_image ==='object' ? this.homeGridDetails.background_image : '',
+      feature_image : this.homeGridDetails.feature_image && typeof this.homeGridDetails.feature_image ==='object' ? this.homeGridDetails.feature_image : []
     })
   }
 
@@ -128,6 +130,30 @@ export class ManageHomeBannerComponent implements OnInit {
           })
       }
   }
+
+  uploadFeatureFile(e:any) {
+    let input = e.target
+    let files = []
+    if (input.files && input.files[0]) {
+      for  (var i =  0; i <  e.target.files.length; i++)  {  
+        files.push(e.target.files[i]);
+      }
+        this.pmSrvc.uploadEventImages(files).pipe(first()).subscribe(res => {
+          if(!res.error) {
+            let fileNames: any[] = this.updateHomeGridForm.value.feature_image;
+            if(this.updateHomeGridForm.value.images && this.updateHomeGridForm.value.feature_image.length ) {
+              fileNames = fileNames.concat(this.updateHomeGridForm.value.feature_image)
+            }
+            res.data.forEach((file: any) => {
+              fileNames.push(file.filename)
+            });
+            this.updateHomeGridForm.patchValue({
+              'feature_image': fileNames
+            })
+          }
+        })
+    }
+}
 
   initiateDataTable() {
     setTimeout(()=> {

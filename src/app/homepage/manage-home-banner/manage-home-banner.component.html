@@ -79,38 +79,43 @@
                   </div>
                   <div class="form-row m-b-20" *ngIf="updateHomeGridForm.value.option">
                     <div class="form-group col-md-12">
-                      <label style="display: block;">Transition(second)</label>
-                      <input type="text" class="form-control"
-                        [ngClass]="{'is-invalid': updateHomeGridForm.controls['transition'].status == 'INVALID' && updateHomeGridForm.controls['transition'].touched}"
-                        id="phone" formControlName="transition" placeholder="Enter Transition">
-                    </div>
-                  </div>
-                  <div class="form-row m-b-20" *ngIf="updateHomeGridForm.value.option">
-                    <div class="form-group col-md-12">
                       <label style="display: block;">Background Link</label>
                       <input type="text" class="form-control"
                         [ngClass]="{'is-invalid': updateHomeGridForm.controls['background_link'].status == 'INVALID' && updateHomeGridForm.controls['background_link'].touched}"
                         id="phone" formControlName="background_link" placeholder="Enter Link">
                     </div>
                   </div>
-                  
                   <div class="form-row m-b-20" *ngIf="!updateHomeGridForm.value.option">
-                    <div class="form-group col-md-12">
-                      <label style="display: block;">Image</label>
-                      <label class="avatar-input">
-                        <span class="avatar avatar-xl">
-                          <img
-                            [src]="updateHomeGridForm.value.image? homeGridIconBaseUrl+updateHomeGridForm.value.image:'assets/img/badges/default.jpg'"
-                            alt="..." class="avatar-img">
-                          <span class="avatar-input-icon">
-                            <i class=" mdi mdi-progress-upload mdi-24px"></i>
-                          </span>
-                        </span>
-                        <input type="file" class="avatar-file-picker" (change)="readFile($event)">
+                    <div class="form-group">
+                        <label style="display: block;">Images</label>
+                        <label class="avatar-input" *ngFor="let pic of updateHomeGridForm.value.feature_image; let i=index">
+                            <i class="fa fa-times delete-icon" aria-hidden="true" (click)="removeImage(i)"></i>
+                            <span class="avatar avatar-xxl">
+                                <img [src]="productImageBaseUrl + pic" alt="..." class="avatar-img">
+                            </span>
+                        
 
-                      </label>
+                        </label>
+                        <div class="input-group mb-3">
+
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroupFileAddon01">Max 5Mb</span>
+                            </div>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="inputGroupFile01" (change)="uploadFeatureFile($event)" multiple>
+                                <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                            </div>
+                        </div>
                     </div>
+                </div>
+                <div class="form-row m-b-20">
+                  <div class="form-group col-md-12">
+                    <label style="display: block;">Transition(second)</label>
+                    <input type="text" class="form-control"
+                      [ngClass]="{'is-invalid': updateHomeGridForm.controls['transition'].status == 'INVALID' && updateHomeGridForm.controls['transition'].touched}"
+                      id="phone" formControlName="transition" placeholder="Enter Transition">
                   </div>
+                </div>
 
                   <div class="form-row m-b-20" *ngIf="!updateHomeGridForm.value.option">
                     <div class="form-group col-md-12">
@@ -135,7 +140,7 @@
 
                   </div>
 
-                  <div class="form-row m-b-20" *ngIf="!updateHomeGridForm.value.option">
+                  <div class="form-row m-b-20">
                     <div class="form-group col-md-12">
                       <label for="mobile">Play Store URL</label>
                       <input class="form-control"
@@ -146,7 +151,7 @@
 
                   </div>
 
-                  <div class="form-row m-b-20" *ngIf="!updateHomeGridForm.value.option">
+                  <div class="form-row m-b-20">
                     <div class="form-group col-md-12">
                       <label for="mobile">App Store URL</label>
                       <input class="form-control"
