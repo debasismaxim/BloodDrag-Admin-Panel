@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
   loginFormConfig: any = {
     username: ['', [Validators.required]],
     password: ['', [Validators.required]],
-    recaptchaReactive : [null,[Validators.required]]
+    recaptchaReactive : [null]
   }
   siteKey = environment.recaptcha.siteKey;
   loginForm: FormGroup;
