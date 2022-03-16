@@ -10,6 +10,7 @@ import { MenuLayoutComponent } from './components/menu-layout/menu-layout.compon
 import { LoginComponent } from './login/login.component';
 import { AlertComponent } from '../_common/components/alert/alert.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
 
 
 
@@ -28,6 +29,8 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
+    RecaptchaModule,
+    RecaptchaFormsModule
   ],
   exports: [
     EmptyLayoutComponent,

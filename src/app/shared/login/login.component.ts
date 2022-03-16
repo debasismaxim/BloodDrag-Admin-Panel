@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ReCaptchaV3Service } from 'ng-recaptcha';
 import { AlertService } from 'src/app/_common/services/alert.service';
 import { AuthService } from 'src/app/_common/services/auth.service';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -15,7 +16,9 @@ export class LoginComponent implements OnInit {
   loginFormConfig: any = {
     username: ['', [Validators.required]],
     password: ['', [Validators.required]],
+    recaptchaReactive : [null,[Validators.required]]
   }
+  siteKey = environment.recaptcha.siteKey;
   loginForm: FormGroup;
   errorMessage: string = '';
   isTextFieldType: boolean;

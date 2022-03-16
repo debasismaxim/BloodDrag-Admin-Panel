@@ -24,9 +24,14 @@
                                     <label>Password</label>
                                     <input type="password" required class="form-control "  formControlName="password" placeholder="Password">
                                 </div>
+                                <div class="form-group floating-label col-md-12">
+                                    <re-captcha 
+                                    siteKey="siteKey"
+                                    formControlName="recaptchaReactive" name="recaptchaReactive"></re-captcha>
+                                </div>
                             </div>
-
-                            <button type="submit" style="margin-top: 90px;" class="btn btn-primary btn-block btn-lg">Login</button>
+                            
+                            <button type="submit" class="btn btn-primary btn-block btn-lg">Login</button>
                             <p style="color: red; text-align: center; padding: 10px;">{{errorMessage}}</p>
                         </form>
                         <!-- <p class="text-right p-t-10">
