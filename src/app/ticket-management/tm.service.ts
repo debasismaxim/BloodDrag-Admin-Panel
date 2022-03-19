@@ -54,7 +54,27 @@ export class TmService {
       })
     );
   }
-
+  purchaseTicket(data: any): Observable<any> {
+    return this.http.post<any>(`${environment.apiUrl}/accounts/purchaseTicket`, data).pipe(
+      map(response => {
+        return response;
+      })
+    );
+  }
+  addToCart(data: any): Observable<any> {
+    return this.http.post<any>(`${environment.apiUrl}/accounts/addToCart`, data).pipe(
+      map(response => {
+        return response;
+      })
+    );
+  }
+  getEventTickets(data: any): Observable<any> {
+    return this.http.post<any>(`${environment.apiUrl}/tickets/getEventWiseTicketDetails`, data).pipe(
+      map(response => {
+        return response;
+      })
+    );
+  }
   getTicketTypeList() {
     let selectField = ['name', 'id']
     return this.http.get<any>(`${environment.apiUrl}/tickets/ticketTypes?selectField=${selectField}`).pipe(

@@ -19,10 +19,62 @@
                         </h5>
                     </div>
                     <div class="card-body ">
+                        <form [formGroup]="createTicketForm" #f="ngForm" autocomplete="off" (ngSubmit)="submitForm(f)">
 
+                            <div class="form-row">
+                                <div class="col-md-6 form-group">
+                                    <label>Events</label>
+                                    <select class="form-control" [ngClass]="{'is-invalid': createTicketForm.controls['eventId'].status == 'INVALID' && createTicketForm.controls['eventId'].touched}" formControlName="eventId" (change)="getEventData($event)">
+                                       
+                                        <option value="" selected disabled>Select Event</option>
+                                        <option *ngFor="let event of eventList" [value]="event.id">{{event?.name}}</option>
+                                    </select>
+
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label>Select Member</label>
+                                    <select class="form-control" [ngClass]="{'is-invalid': createTicketForm.controls['member'].status == 'INVALID' && createTicketForm.controls['member'].touched}" formControlName="member">
+                                       
+                                        <option value="" selected disabled>Select Member</option>
+                                        <option *ngFor="let member of allMemberList" [value]="member.id">{{member?.firstName}} {{member?.lastName}}</option>
+                                    </select>
+
+                                </div>
+                                <div class="col-md-12 form-group">
+                                    <div class="row">
+                                        <div class="col-2 form-group" *ngFor="let ticket of eventTickets">
+                                            <label>{{ticket['ticketTypeName']}} &nbsp; ({{ticket['price']|currency : 'USD'}} + Tax({{ticket['tax']}}%))</label>
+                                            <br/>
+                                            <button type="button" class="btn btn-danger" (click)="substractTicket(ticket)"><i class="fa fa-minus"></i></button>&nbsp;
+                                            <button type="button" class="btn btn-clear">{{ticketCount && ticketCount[ticket['ticketTypeId']] ? ticketCount[ticket['ticketTypeId']] : 0}}</button>&nbsp;
+                                            <button type="button" class="btn btn-primary" (click)="addTicket(ticket)"><i class="fa fa-plus"></i></button>&nbsp;
+                                        </div>
+                                        <div class="col-6">
+                                            <label>Payment Mode</label>
+                                            <select class="form-control">
+                                               
+                                                <option>Cash</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <p> <b>SubTotal Price </b>: {{subTotalPrice | currency : 'USD'}}</p>
+                                    </div>
+                                    <div class="col-12">
+                                        <p><b>Tax </b>: {{taxPrice | currency : 'USD'}}</p>
+                                    </div>
+                                    <div class="col-12">
+                                        <p><b>Total Price</b> : {{totalPrice | currency : 'USD'}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" [disabled]="!totalPrice" class="btn btn-primary">Add</button>
+
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</section>
