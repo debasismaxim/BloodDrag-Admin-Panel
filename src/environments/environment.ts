@@ -8,7 +8,7 @@ export const environment = {
   baseUrl: "https://api.blooddrag.com",
   currentUrl: "http://localhost:4200/",
   recaptcha : {
-    siteKey : "6LfmtNceAAAAALZKBCZxLhn817tGOwaKN_tazMUG",
+    siteKey : "6LcThukeAAAAAA1TZW48vXEBYk-MOic8gLRCLiy0",
     secretKey : "6LfmtNceAAAAALfD5bMXl8ApsMmGxyLCfjm7mdNk"
   }
 };

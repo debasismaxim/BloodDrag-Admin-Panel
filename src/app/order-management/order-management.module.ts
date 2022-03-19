@@ -6,13 +6,15 @@ import { ViewOrdersComponent } from './view-orders/view-orders.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EditOrderComponent } from './edit-order/edit-order.component';
 import { ViewTicketsComponent } from './view-tickets/view-tickets.component';
+import { AddTicketComponent } from './add-ticket/add-ticket.component';
 
 
 @NgModule({
   declarations: [
     ViewOrdersComponent,
     ViewTicketsComponent,
-    EditOrderComponent
+    EditOrderComponent,
+    AddTicketComponent
   ],
   imports: [
     CommonModule,
@@ -20,5 +22,6 @@ import { ViewTicketsComponent } from './view-tickets/view-tickets.component';
     FormsModule,
     ReactiveFormsModule
   ]
+
 })
 export class OrderManagementModule { }
