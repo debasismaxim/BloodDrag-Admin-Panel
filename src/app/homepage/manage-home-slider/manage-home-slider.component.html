@@ -37,17 +37,14 @@
                         </div>
 
                     </div>
-                <div class="card-body ">
-                    <div class="row">
-                        <div class="col-md-6 offset-md-3">
-                            <form [formGroup]="updateSocialMediaForm"
-                            #f="ngForm"
-                            autocomplete="off"
-                            (ngSubmit)="f.valid ? updateSocialMedia(f): ''">
-                            <div class="form-row m-b-20" >
-                            <div class="form-group col-md-12">
-                                <label style="display: block;">Image</label>
-                                <label class="avatar-input">
+                    <div class="card-body ">
+                        <div class="row">
+                            <div class="col-md-6 offset-md-3">
+                                <form [formGroup]="updateSocialMediaForm" #f="ngForm" autocomplete="off" (ngSubmit)="f.valid ? updateSocialMedia(f): ''">
+                                    <div class="form-row m-b-20">
+                                        <div class="form-group col-md-12">
+                                            <label style="display: block;">Image</label>
+                                            <label class="avatar-input">
                                     <span class="avatar avatar-xl">
                                         <img [src]="updateSocialMediaForm.value.media? socialIconBaseUrl+updateSocialMediaForm.value.media:'assets/img/badges/default.jpg'" alt="..."
                                              class="avatar-img">
@@ -58,72 +55,60 @@
                                     <input type="file" class="avatar-file-picker" (change)="readFile($event)" >
 
                                 </label>
-                            </div>  
+                                        </div>
+                                    </div>
+                                    <div class="form-row m-b-20">
+                                        <div class="form-group col-md-12">
+                                            <label for="mobile">Header</label>
+                                            <input type="text" class="form-control" [ngClass]="{'is-invalid': updateSocialMediaForm.controls['header'].status == 'INVALID' && updateSocialMediaForm.controls['header'].touched}" id="phone" formControlName="header" placeholder="Enter Header">
+                                        </div>
+
+
+                                    </div>
+
+                                    <div class="form-row m-b-20">
+                                        <div class="form-group col-md-12">
+                                            <label for="mobile">Description</label>
+                                            <input type="text" class="form-control" [ngClass]="{'is-invalid': updateSocialMediaForm.controls['description'].status == 'INVALID' && updateSocialMediaForm.controls['description'].touched}" id="phone" formControlName="description" placeholder="Enter Description">
+                                        </div>
+
+
+                                    </div>
+
+
+                                    <div class="form-row m-b-20">
+                                        <div class="form-group col-md-12">
+                                            <label for="mobile">More Text</label>
+                                            <input type="text" class="form-control" [ngClass]="{'is-invalid': updateSocialMediaForm.controls['moreText'].status == 'INVALID' && updateSocialMediaForm.controls['moreText'].touched}" id="phone" formControlName="moreText" placeholder="Enter More Button Text">
+                                        </div>
+
+
+                                    </div>
+
+
+                                    <div class="form-row m-b-20">
+                                        <div class="form-group col-md-12">
+                                            <label for="mobile">More Link</label>
+                                            <input type="text" class="form-control" [ngClass]="{'is-invalid': updateSocialMediaForm.controls['moreLink'].status == 'INVALID' && updateSocialMediaForm.controls['moreLink'].touched}" id="phone" formControlName="moreLink" placeholder="Enter More Button Link">
+                                        </div>
+
+
+                                    </div>
+
+                                    <div class="text-center">
+                                        <button type="submit" [disabled]="f.invalid" class="btn btn-primary">{{socialMediaId ? "Update": "Create"}}</button>
+
+                                    </div>
+
+
+                                </form>
                             </div>
-                                <div class="form-row m-b-20" >
-                                    <div class="form-group col-md-12">
-                                        <label for="mobile">Header</label>
-                                        <input type="text" class="form-control"
-                                        [ngClass]="{'is-invalid': updateSocialMediaForm.controls['header'].status == 'INVALID' && updateSocialMediaForm.controls['header'].touched}"
-                                        id="phone" formControlName="header"
-                                            placeholder="Enter Header">
-                                    </div>
-                                            
-                                    
-                                </div>
-
-                                <div class="form-row m-b-20" >
-                                    <div class="form-group col-md-12">
-                                        <label for="mobile">Description</label>
-                                        <input type="text" class="form-control"
-                                        [ngClass]="{'is-invalid': updateSocialMediaForm.controls['description'].status == 'INVALID' && updateSocialMediaForm.controls['description'].touched}"
-                                        id="phone" formControlName="description"
-                                            placeholder="Enter Description">
-                                    </div>
-                                            
-                                    
-                                </div>
-
-                                
-                                <div class="form-row m-b-20" >
-                                    <div class="form-group col-md-12">
-                                        <label for="mobile">More Text</label>
-                                        <input type="text" class="form-control"
-                                        [ngClass]="{'is-invalid': updateSocialMediaForm.controls['moreText'].status == 'INVALID' && updateSocialMediaForm.controls['moreText'].touched}"
-                                        id="phone" formControlName="moreText"
-                                            placeholder="Enter More Button Text">
-                                    </div>
-                                            
-                                    
-                                </div>
-
-
-                                <div class="form-row m-b-20" >
-                                    <div class="form-group col-md-12">
-                                        <label for="mobile">More Link</label>
-                                        <input type="text" class="form-control"
-                                        [ngClass]="{'is-invalid': updateSocialMediaForm.controls['moreLink'].status == 'INVALID' && updateSocialMediaForm.controls['moreLink'].touched}"
-                                        id="phone" formControlName="moreLink"
-                                            placeholder="Enter More Button Link">
-                                    </div>
-                                            
-                                    
-                                </div>
-                                
-                                <div class="text-center">
-                                    <button type="submit" [disabled]="f.invalid" class="btn btn-primary">{{socialMediaId ? "Update": "Create"}}</button>
-            
-                                </div>
-            
-                                
-                            </form>
                         </div>
+
+
+
                     </div>
-
-                    
-
                 </div>
-</div>
             </div>
             <div class="col-12 m-t-20">
                 <div class="card">
@@ -152,41 +137,39 @@
                         <div class="table-responsive p-t-10">
                             <table id="member" class="table   " style="width:100%">
                                 <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Image</th>
-                                    <th>Header</th>
-                                    <th>Description</th>
-                                    <th>More Text</th>
-                                    <th>More Link</th>
-                                    
-                                </tr>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Image</th>
+                                        <th>Header</th>
+                                        <th>Description</th>
+                                        <th>More Text</th>
+                                        <th>More Link</th>
+
+                                    </tr>
                                 </thead>
                                 <tbody>
-                                <tr *ngFor="let sm of allSocialMediaList; let i=index" style="vertical-align: middle;">
-                                    <td>{{i+1}}</td>
-                                    <td><span class="avatar avatar-l">
+                                    <tr *ngFor="let sm of allSocialMediaList; let i=index" style="vertical-align: middle;">
+                                        <td>{{i+1}}</td>
+                                        <td><span class="avatar avatar-l">
                                         <img [src]="socialIconBaseUrl + sm.image" alt="..." class="avatar-img table-data">
                                     </span></td>
-                                    <td>
-                                        {{sm.header}}
-                                    </td>
-                                    <td>
-                                        {{sm.description}}
-                                    </td>
-                                    <td>
-                                        {{sm.moreText}}
-                                    </td>
-                                    <td>
-                                        {{sm.moreLink}}
-                                    </td>
-                                    <td>
-                                        <a style="font-size:18px;padding: 5px; cursor: pointer;" (click)="setEditForm(sm)" ><i class="mdi mdi-square-edit-outline" title="Edit" alt="Edit"></i></a>
-                                        <a style="font-size:18px; cursor: pointer;" 
-                                        (click)="deleteById(sm.id)"
-                                       ><i class="mdi mdi-delete-circle-outline" title="delete" alt="delete"></i></a>
-                                    </td>
-                                </tr>
+                                        <td>
+                                            {{sm.header}}
+                                        </td>
+                                        <td>
+                                            {{sm.description}}
+                                        </td>
+                                        <td>
+                                            {{sm.moreText}}
+                                        </td>
+                                        <td>
+                                            {{sm.moreLink}}
+                                        </td>
+                                        <td>
+                                            <a style="font-size:18px;padding: 5px; cursor: pointer;" (click)="setEditForm(sm)"><i class="mdi mdi-square-edit-outline" title="Edit" alt="Edit"></i></a>
+                                            <a style="font-size:18px; cursor: pointer;" (click)="deleteById(sm._id)"><i class="mdi mdi-delete-circle-outline" title="delete" alt="delete"></i></a>
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>

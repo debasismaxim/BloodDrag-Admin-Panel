@@ -43,7 +43,7 @@ export class HomeService {
 
 
   deleteSlideContent(id: any) {
-    return this.http.get<any>(`${environment.apiUrl}/configurations/delete/${id}`).pipe(
+    return this.http.post<any>(`${environment.apiUrl}/configurations/slide/delete/${id}`, {}).pipe(
       map(response => {
         return response;
       })

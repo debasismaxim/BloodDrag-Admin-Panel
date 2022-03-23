@@ -71,22 +71,22 @@ export class ManageHomeSliderComponent implements OnInit {
   updateSocialMedia(f: any) {
     let payLoad = JSON.parse(JSON.stringify(this.updateSocialMediaForm.value))
     if(!this.socialMediaId) {
-      this.homeSrvc.createSocialMedia(payLoad).subscribe(res => {
+      this.homeSrvc.createSlideContent(payLoad).subscribe(res => {
         if(!res.error) {
           $(window).scrollTop(0)
           f.resetForm();
-          this.alertSrvc.success("Social media created successfully.")
+          this.alertSrvc.success("Home Slide Content Created Successfully.")
           this.getAllSocialMediaList()
         }
         
       })
     } else {
-      this.homeSrvc.updateSocialMedia(payLoad, this.socialMediaId).subscribe(res => {
+      this.homeSrvc.updateSlideContent(payLoad, this.socialMediaId).subscribe(res => {
         if(!res.error) {
           $(window).scrollTop(0)
           this.socialMediaId = undefined
           f.resetForm();
-          this.alertSrvc.success("Social media updated successfully.")
+          this.alertSrvc.success("Home Slide Content Updated Successfully.")
           this.getAllSocialMediaList()
         }
 
@@ -106,7 +106,7 @@ export class ManageHomeSliderComponent implements OnInit {
 
           if(!res.error) {
             this.updateSocialMediaForm.patchValue({
-              'icon': <string>res.data.filename
+              'media': <string>res.data.filename
             })
           }
         })
@@ -127,20 +127,15 @@ export class ManageHomeSliderComponent implements OnInit {
     const dialogRef = this.dialog.open(DeleteConfirmDialogComponent, {
       width: '400px',
       disableClose: true,
-      data: {message: "Are you sure to delete the social media?"}
+      data: {message: "Are you sure to delete the Slide?"}
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if(result) {
-        this.homeSrvc.delteSocialMedia(id).subscribe(res => {
+        this.homeSrvc.deleteSlideContent(id).subscribe(res => {
           if(!res.error) {
-            this.alertSrvc.success("Social media deleted successfully.")
-            this.homeSrvc.getAllSocialMediaList().subscribe(res => {
-              if(!res.error) {
-                this.allSocialMediaList = res.data
-              }
-              
-            })
+            this.alertSrvc.success("Deleted successfully.")
+            this.getAllSocialMediaList();
           }
           
         })
