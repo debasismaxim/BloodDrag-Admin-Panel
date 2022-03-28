@@ -76,7 +76,7 @@ export class TmService {
     );
   }
   getTicketTypeList() {
-    let selectField = ['name', 'id']
+    let selectField = ['name', 'id','seq']
     return this.http.get<any>(`${environment.apiUrl}/tickets/ticketTypes?selectField=${selectField}`).pipe(
       map(response => {
         return response;

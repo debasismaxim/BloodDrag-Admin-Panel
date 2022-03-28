@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ReCaptchaV3Service } from 'ng-recaptcha';
+// import { ReCaptchaV3Service } from 'ng-recaptcha';
 import { AlertService } from 'src/app/_common/services/alert.service';
 import { AuthService } from 'src/app/_common/services/auth.service';
 import { environment } from 'src/environments/environment';
@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
   loginFormConfig: any = {
     username: ['', [Validators.required]],
     password: ['', [Validators.required]],
-    recaptchaReactive : [null]
+    recaptchaReactive : [null,Validators.required]
   }
   siteKey = environment.recaptcha.siteKey;
   loginForm: FormGroup;
@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
   submitted = false;
 
   constructor(private fb: FormBuilder, private authSrvc: AuthService, 
-    private recaptchaV3Service: ReCaptchaV3Service,
+    // private recaptchaV3Service: ReCaptchaV3Service,
     private alertSrvc: AlertService, private router: Router, private route: ActivatedRoute) {
     // this.loginForm = this.fb.group(this.loginFormConfig);
    }

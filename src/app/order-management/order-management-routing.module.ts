@@ -23,6 +23,11 @@ const routes: Routes = [
     component: AddTicketComponent,
   },
   {
+    path: 'edit-ticket/:id',
+    canActivate: [AuthGuard],
+    component: AddTicketComponent,
+  },
+  {
     path: 'edit-order/:orderId',
     canActivate: [AuthGuard],
     component: EditOrderComponent,

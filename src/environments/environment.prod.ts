@@ -4,7 +4,7 @@ export const environment = {
   baseUrl: "https://api.blooddrag.com",//"http://ec2-3-135-246-141.us-east-2.compute.amazonaws.com/api/static",
   currentUrl: "http://betaadmin.blooddrag.com/", //"http://ec2-13-58-107-244.us-east-2.compute.amazonaws.com/",
   recaptcha : {
-    siteKey : "6LfmtNceAAAAALZKBCZxLhn817tGOwaKN_tazMUG",
-    secretKey : "6LfmtNceAAAAALfD5bMXl8ApsMmGxyLCfjm7mdNk"
+    siteKey : "6LcThukeAAAAAA1TZW48vXEBYk-MOic8gLRCLiy0",
+    secretKey : "6LcThukeAAAAAB8yLM2jPIy8IftNi_6f_Y_R5q8F"
   }
 };

@@ -20,7 +20,7 @@ export class ManageStripeComponent implements OnInit {
   homeGridDetails: any
   homeGridId: any
   firstLoad = true
-
+keys:any;
   homeGridIconBaseUrl = environment.baseUrl + "/uploads/home_assets/"
   
   constructor(private homeSrvc: HomeService, private alertSrvc: AlertService, 
@@ -37,12 +37,34 @@ export class ManageStripeComponent implements OnInit {
 
   setHomeGridForm() {
     console.log(this.homeGridDetails);
+    this.keys = {};
+    this.keys['sandbox'] = this.homeGridDetails['sandbox'];
+    this.keys['live'] = this.homeGridDetails['live'];
     this.updateHomeGridForm.patchValue({
-      secret: this.homeGridDetails.keys ? this.homeGridDetails.keys['secret'] : '',
-      public: this.homeGridDetails.keys ? this.homeGridDetails.keys['public'] : '',
+      secret: this.homeGridDetails.keys ? this.homeGridDetails[this.homeGridDetails.env] && this.homeGridDetails[this.homeGridDetails.env]['secret'] : '',
+      public: this.homeGridDetails.keys ? this.homeGridDetails[this.homeGridDetails.env] && this.homeGridDetails[this.homeGridDetails.env]['public'] : '',
 
       env : this.homeGridDetails.env ? this.homeGridDetails.env : 'sandbox'
     })
+  }
+  changeData(){
+    const envValue = this.updateHomeGridForm.get('env')?.value;
+    const keysData = {
+      secret:  this.updateHomeGridForm.get('secret')?.value,
+      public:  this.updateHomeGridForm.get('public')?.value
+    }
+    this.updateHomeGridForm.patchValue(keysData)
+    this.keys[envValue] =keysData
+  }
+
+  radioChange(event:any){
+    const envValue = event.value;
+    const keysData = {
+      secret:  this.keys[envValue] ? this.keys[envValue]['secret']:'',
+      public:  this.keys[envValue] ? this.keys[envValue]['public'] : ''
+    }
+    this.updateHomeGridForm.patchValue(keysData)
+    this.keys[envValue] =keysData
   }
 
   setEditForm(homeGridData:any) {
@@ -64,10 +86,8 @@ export class ManageStripeComponent implements OnInit {
   updateHomeBanner(f: any) {
     let payLoad = JSON.parse(JSON.stringify(this.updateHomeGridForm.value))
     console.log(payLoad);
-    payLoad['keys'] ={
-      secret : payLoad['secret'],
-      public : payLoad['public'],
-    } 
+    payLoad['sandbox'] = this.keys['sandbox']
+    payLoad['live'] = this.keys['live']
     console.log(payLoad);
       this.homeSrvc.saveStripe({record : payLoad}).subscribe(res => {
         if(!res.error) {

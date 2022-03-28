@@ -21,10 +21,11 @@ export class HideShowComponent implements OnInit {
       "show": true,
       "hide" : false
     },
-    // {
-    //   "name": "slide",
-    //   "show": true
-    // },
+    {
+      "name": "slide",
+      "show": true,
+      "hide" : false
+    },
     {
       "name": "notification",
       "show": true,
@@ -52,7 +53,7 @@ export class HideShowComponent implements OnInit {
     this.settingsSrvc.getHideShowSettings().subscribe(res => {
       if(!res.error) {
         this.sections = res.data;
-        this.sections = this.sections.filter((obj)=> obj['name'] !='home' && obj['name'] !='slide');
+        this.sections = this.sections.filter((obj)=> obj['name'] !='home');
         for(let section in this.sections){
           this.sections[section]['hide'] = !this.sections[section]['show'];
         }

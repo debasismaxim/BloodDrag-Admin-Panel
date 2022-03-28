@@ -21,10 +21,12 @@ export class ManageTicketTypeComponent implements OnInit {
   ngOnInit(): void {
     this.updateTicketTypeForm = this.fb.group({
       name: ['', Validators.required],
-      id: ['']
+      id: [''],
+      seq : [1]
     });
     this.createTicketTypeForm = this.fb.group({
       name: ['', Validators.required],
+      seq : [1]
     });
     this.getTicketTypeList()
   }
@@ -33,7 +35,8 @@ export class ManageTicketTypeComponent implements OnInit {
     $("#updateTicketTypeModal").modal("show")
     this.updateTicketTypeForm.patchValue({
       id: ticketType.id,
-      name: ticketType.name
+      name: ticketType.name,
+      seq : ticketType.seq ? ticketType.seq : 1
     })
   }
 
@@ -41,6 +44,9 @@ export class ManageTicketTypeComponent implements OnInit {
     this.tmSrvc.getTicketTypeList().subscribe(res => {
       if(!res.error) {
         this.ticketTypeList = res.data
+        this.ticketTypeList.sort(function(a, b) {
+          return parseFloat(a.seq) - parseFloat(b.seq);
+      });
       }
       
     })

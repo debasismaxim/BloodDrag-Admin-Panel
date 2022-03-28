@@ -40,6 +40,7 @@
                                 <thead>
                                 <tr>
                                     <th>Ticket Type</th>
+                                    <th>Sequence</th>
                                     <th class="text-center">Action</th>
                                     
                                 </tr>
@@ -47,6 +48,7 @@
                                 <tbody>
                                 <tr *ngFor="let tkt of ticketTypeList">
                                     <td>{{tkt.name}}</td>
+                                    <td>{{tkt.seq}}</td>
                                     <td class="text-center">
                                         <a style="font-size:18px;padding: 5px; cursor: pointer;" (click)="openUpdateModal(tkt)"><i class="mdi mdi-square-edit-outline" title="Edit" alt="Edit"></i></a>
                                         <a style="font-size:18px; cursor: pointer;" 
@@ -82,8 +84,16 @@
                                                             <input type="text" class="form-control" formControlName="name" 
                                                             [ngClass]="{'is-invalid': createTicketTypeForm.controls['name'].status == 'INVALID' && createTicketTypeForm.controls['name'].touched}"
                                                                 placeholder="Ticket type">
+                                                          
                                                             
                                                         </div>
+                                                        <div class="form-group col-md-12">
+                                                            <!-- <label>Ticket Type</label> -->
+                                                            <input type="text" class="form-control" formControlName="seq" 
+                                                            placeholder="Ticket Type Sequence">
+                                                            
+                                                        </div>
+                                                        
                                                     </div>
                         
                                                     <!-- <button type="submit" class="btn btn-primary">Update Ticket Types</button> -->
@@ -120,6 +130,12 @@
                                                            placeholder="Ticket type">
                                                        
                                                    </div>
+                                                   <div class="form-group col-md-12">
+                                                    <!-- <label>Ticket Type</label> -->
+                                                    <input type="text" class="form-control" formControlName="seq" 
+                                                        placeholder="Ticket Type Sequence">
+                                                    
+                                                </div>
                                                </div>
                    
                                                <!-- <button type="submit" class="btn btn-primary">Update Ticket Types</button> -->

@@ -46,9 +46,9 @@
                     <div class="form-group col-md-6">
                       <label class="example-margin d-block">Choose Option:</label>
                       <mat-radio-group formControlName="env" name="env">
-                        <mat-radio-button class="example-margin p-1" [checked]="updateHomeGridForm.value.env === 'live'"
+                        <mat-radio-button (change)="radioChange($event)" class="example-margin p-1" [checked]="updateHomeGridForm.value.env === 'live'"
                           [value]="'live'">Production / Live</mat-radio-button>
-                        <mat-radio-button class="example-margin p-1 ml-3l"
+                        <mat-radio-button (change)="radioChange($event)" class="example-margin p-1 ml-3l"
                           [checked]="updateHomeGridForm.value.option === 'sandbox'" [value]="'sandbox'"> SandBox</mat-radio-button>
                       </mat-radio-group>
                     </div>
@@ -56,7 +56,7 @@
                   <div class="form-row m-b-20">
                     <div class="form-group col-md-12">
                       <label for="mobile">Secret Key</label>
-                      <input type="text" class="form-control"
+                      <input type="text" (change)="changeData()" class="form-control"
                         [ngClass]="{'is-invalid': updateHomeGridForm.controls['secret'].status == 'INVALID' && updateHomeGridForm.controls['secret'].touched}"
                         id="phone" formControlName="secret" placeholder="Enter Secret">
                     </div>
@@ -67,6 +67,7 @@
                     <div class="form-group col-md-12">
                       <label for="mobile">Public Key</label>
                       <input type="text" class="form-control"
+                      (change)="changeData()"
                         [ngClass]="{'is-invalid': updateHomeGridForm.controls['public'].status == 'INVALID' && updateHomeGridForm.controls['public'].touched}"
                         id="phone" formControlName="public" placeholder="Enter public">
                     </div>

@@ -45,11 +45,10 @@
                                         <td>{{order.totalPrice | currency : 'USD'}}</td>
                                         <td>{{order['userData'] ? (order['userData']['firstName'] + ' ' +order['userData']['lastName']) : '' }}</td>
                                         <td>{{order['status']}}</td>
-                                        <td>
-                                            <a style="font-size:14px;padding: 5px;">
-                                            View/Edit</a>
-                                            <a style="font-size:14px;padding: 5px;">
-                                                Delete</a>
+                                        <td class="text-center">
+                                        <a style="font-size:18px;padding: 5px;cursor: pointer;"><i class="fa fa-eye" title="View" alt="View"></i></a>
+                                            <a style="font-size:18px;padding: 5px; cursor: pointer;" [routerLink]="['/om/edit-ticket/'+order['_id']]"><i class="mdi mdi-square-edit-outline" title="Edit" alt="Edit"></i></a>
+                                            <a style="font-size:18px; cursor: pointer;"><i class="mdi mdi-delete-circle-outline" title="delete" alt="delete"></i></a>
                                         </td>
                                     </tr>
                                 </tbody>
