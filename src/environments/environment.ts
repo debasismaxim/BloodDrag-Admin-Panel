@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: "http://localhost:5000/api",
-  baseUrl: "https://api.blooddrag.com",
+  apiUrl: "http://localhost:5001/api",
+  baseUrl: "http://localhost:5001",
   currentUrl: "http://localhost:4200/",
   recaptcha : {
     siteKey : "6LcThukeAAAAAA1TZW48vXEBYk-MOic8gLRCLiy0",
